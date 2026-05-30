@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { css } from "styled-system/css";
 import { ShareButton } from "@/components/ShareButton";
@@ -117,6 +118,33 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div className={css({ marginTop: "120px" })}>
           <Profile />
         </div>
+
+        <Link
+          href="/"
+          className={css({
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2",
+            marginTop: "8",
+            paddingBlock: "8",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: "border",
+            borderRadius: "md",
+            fontSize: "xs",
+            color: "text.muted",
+          })}
+        >
+          <img
+            src="/icons/arrow-left.svg"
+            alt=""
+            width={16}
+            height={16}
+            className={css({ _dark: { filter: "invert(1)" } })}
+          />
+          All Writings
+        </Link>
       </article>
     </main>
   );
