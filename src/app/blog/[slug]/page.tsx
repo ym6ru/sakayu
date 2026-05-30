@@ -32,6 +32,7 @@ export async function generateMetadata({
       publishedTime: frontmatter.publishedAt,
       modifiedTime: frontmatter.updatedAt ?? frontmatter.publishedAt,
       tags: frontmatter.tags,
+      images: ["/opengraph-image"],
     },
   };
 }
