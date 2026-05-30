@@ -1,7 +1,11 @@
 import { css } from "styled-system/css";
 import { FvGraphic } from "@/components/FvGraphic";
+import { PostListItem } from "@/components/PostListItem";
+import { getAllPosts } from "@/lib/blog";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getAllPosts();
+
   return (
     <main
       className={css({
@@ -36,6 +40,21 @@ export default function Home() {
       </section>
 
       <FvGraphic />
+
+      <div
+        className={css({
+          marginTop: "10",
+          borderTopWidth: "0.5px",
+          borderTopStyle: "solid",
+          borderTopColor: "border",
+        })}
+      />
+
+      <ul className={css({ listStyle: "none", marginBottom: "20" })}>
+        {posts.map((post) => (
+          <PostListItem key={post.slug} post={post} />
+        ))}
+      </ul>
     </main>
   );
 }

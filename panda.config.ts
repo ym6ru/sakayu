@@ -36,8 +36,8 @@ export default defineConfig({
           darkBg: { value: "#222222" },
         },
         fonts: {
-          body: { value: "var(--font-line-seed-jp), sans-serif" },
-          heading: { value: "var(--font-line-seed-jp), sans-serif" },
+          body: { value: '"ellipsis-fallback", var(--font-line-seed-jp), sans-serif' },
+          heading: { value: '"ellipsis-fallback", var(--font-line-seed-jp), sans-serif' },
         },
         fontSizes: {
           "2xs": { value: "0.625rem" },
