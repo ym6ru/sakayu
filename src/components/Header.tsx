@@ -41,8 +41,8 @@ export function Header() {
           paddingInline: "4",
         })}
       >
-        <Link href="/" className={css({ display: "inline-flex", alignItems: "center", gap: "2" })}>
-          <img src="/icons/logo.svg" alt="" width={28} height={28} />
+        <Link href="/" className={css({ display: "inline-flex", alignItems: "center", gap: "3" })}>
+          <img src="/icons/logo.svg" alt="" width={32} height={32} />
           <span className={css({ fontSize: "md", fontWeight: "regular", color: "text.primary" })}>
             sakayu
           </span>
