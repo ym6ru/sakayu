@@ -115,7 +115,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <ShareButton title={frontmatter.title} />
         </div>
 
-        <div className={css({ marginTop: "120px" })}>
+        <div className={css({ marginTop: "20" })}>
           <Profile />
         </div>
 
@@ -126,7 +126,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             alignItems: "center",
             justifyContent: "center",
             gap: "2",
-            marginTop: "8",
+            marginTop: "10",
             paddingBlock: "8",
             borderWidth: "1px",
             borderStyle: "solid",
