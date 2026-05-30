@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { LINE_Seed_JP } from "next/font/google";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const lineSeedJP = LINE_Seed_JP({
   weight: ["400", "700"],
@@ -29,6 +30,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
