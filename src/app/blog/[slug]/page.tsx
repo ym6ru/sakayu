@@ -24,6 +24,16 @@ export async function generateMetadata({
     title: frontmatter.title,
     description: frontmatter.description,
     alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      type: "article",
+      url: `/blog/${slug}`,
+      title: frontmatter.title,
+      description: frontmatter.description,
+      publishedTime: frontmatter.publishedAt,
+      modifiedTime: frontmatter.updatedAt ?? frontmatter.publishedAt,
+      tags: frontmatter.tags,
+      images: ["/opengraph-image"],
+    },
   };
 }
 
