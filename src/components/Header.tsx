@@ -48,7 +48,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className={css({ display: "flex", alignItems: "center", gap: "4" })}>
+        <nav className={css({ display: "flex", alignItems: "center", gap: "6" })}>
           <Link href="/" className={css({ fontSize: "sm", color: "text.primary" })}>
             blog
           </Link>
