@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { css } from "styled-system/css";
 import { ShareButton } from "@/components/ShareButton";
+import { Profile } from "@/components/Profile";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 
 export const dynamicParams = false;
@@ -111,6 +112,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className={css({ marginTop: "6" })}>
           <ShareButton title={frontmatter.title} />
+        </div>
+
+        <div className={css({ marginTop: "120px" })}>
+          <Profile />
         </div>
       </article>
     </main>
