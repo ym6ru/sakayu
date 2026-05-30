@@ -27,6 +27,12 @@ export default defineConfig({
     a: {
       color: "link",
     },
+    ":focus-visible": {
+      outlineWidth: "2px",
+      outlineStyle: "solid",
+      outlineColor: "text.primary",
+      outlineOffset: "2px",
+    },
   },
 
   theme: {
