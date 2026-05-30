@@ -16,7 +16,7 @@ export function Profile() {
     >
       <div className={css({ display: "flex", alignItems: "center", gap: "5" })}>
         <img src="/icons/logo.svg" alt="" width={48} height={48} />
-        <div className={css({ display: "flex", flexDirection: "column", gap: "2" })}>
+        <div className={css({ display: "flex", flexDirection: "column" })}>
           <span className={css({ fontSize: "md", color: "text.primary" })}>sakayu</span>
           <span className={css({ fontSize: "xs", color: "text.muted" })}>DX Developer.</span>
         </div>
