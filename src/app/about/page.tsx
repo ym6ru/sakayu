@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { css } from "styled-system/css";
 import { Hero } from "@/components/Hero";
+
+export const metadata: Metadata = {
+  title: "about",
+  description: "さかゆ（DX Developer）について。経歴・興味のある分野・愛用ガジェットなど。",
+  alternates: { canonical: "/about" },
+};
 
 const link = css({ color: "text.primary", textDecoration: "underline" });
 

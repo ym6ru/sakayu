@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { css } from "styled-system/css";
 import { Hero } from "@/components/Hero";
 import { PostListItem } from "@/components/PostListItem";
 import { getAllPosts } from "@/lib/blog";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function Home() {
   const posts = await getAllPosts();
