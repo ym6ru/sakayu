@@ -17,8 +17,8 @@ export default function About() {
       <Hero title="about" subtitle="さかゆについて。" />
 
       <div className={css({ marginTop: "10", marginBottom: "120px" })}>
-        <p className={css({ fontSize: "lg", color: "text.primary" })}>sakayu</p>
-        <p className={css({ marginTop: "1", fontSize: "2xs", color: "text.muted" })}>
+        <p className={css({ fontSize: "lg", fontWeight: "bold", color: "text.primary" })}>sakayu</p>
+        <p className={css({ marginTop: "1", fontSize: "xs", color: "text.muted" })}>
           DX Developer.
         </p>
 
@@ -35,7 +35,7 @@ export default function About() {
           キーボードやマウスなどのガジェットが好きです。
         </p>
 
-        <p className={css({ marginTop: "4", fontSize: "xs", color: "text.primary" })}>
+        <p className={css({ marginTop: "4", fontSize: "sm", color: "text.primary" })}>
           𝕏：
           <a
             href="https://x.com/XpKM4agvDSOfoGp"
@@ -46,7 +46,7 @@ export default function About() {
             @XpKM4agvDSOfoGp
           </a>
         </p>
-        <p className={css({ marginTop: "4", fontSize: "xs", color: "text.primary" })}>
+        <p className={css({ marginTop: "4", fontSize: "sm", color: "text.primary" })}>
           GitHub：
           <a
             href="https://github.com/ym6ru"
@@ -60,7 +60,7 @@ export default function About() {
 
         <h2
           className={css({
-            marginTop: "6",
+            marginTop: "8",
             fontSize: "md",
             fontWeight: "bold",
             color: "text.primary",
@@ -90,6 +90,33 @@ export default function About() {
         >
           <li>UIデザイン : Figma</li>
           <li>Webフロント : TypeScript（Next.js,Nuxt,Astro）</li>
+        </ul>
+
+        <h2
+          className={css({
+            marginTop: "8",
+            fontSize: "md",
+            fontWeight: "bold",
+            color: "text.primary",
+          })}
+        >
+          My gear
+        </h2>
+        <ul
+          className={css({
+            marginTop: "2",
+            paddingLeft: "5",
+            listStyleType: "disc",
+            fontSize: "sm",
+            color: "text.primary",
+            "& li + li": { marginTop: "2" },
+          })}
+        >
+          <li>Mac Mini（M4）</li>
+          <li>Macbook Air（M5）</li>
+          <li>プログラミング : Maestri / Zed</li>
+          <li>キーボード : HHKB Professional HYBRID Type-S / Cornix LP</li>
+          <li>マウス : Logicool MX Ergo</li>
         </ul>
       </div>
     </main>
