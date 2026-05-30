@@ -15,6 +15,9 @@ export default defineConfig({
   },
 
   globalCss: {
+    html: {
+      scrollbarGutter: "stable",
+    },
     "html, body": {
       backgroundColor: "bg",
       color: "text.primary",
