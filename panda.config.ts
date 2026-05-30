@@ -36,8 +36,8 @@ export default defineConfig({
           darkBg: { value: "#222222" },
         },
         fonts: {
-          body: { value: '"LINE Seed JP", sans-serif' },
-          heading: { value: '"LINE Seed JP", sans-serif' },
+          body: { value: "var(--font-line-seed-jp), sans-serif" },
+          heading: { value: "var(--font-line-seed-jp), sans-serif" },
         },
         fontSizes: {
           "2xs": { value: "0.625rem" },
