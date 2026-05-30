@@ -62,7 +62,7 @@ export function PostListItem({ post }: { post: PostMeta }) {
             alignItems: "center",
             gap: "2",
             marginTop: "4",
-            fontSize: "sm",
+            fontSize: "xs",
             color: "text.muted",
           })}
         >
