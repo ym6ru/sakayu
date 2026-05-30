@@ -20,7 +20,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const { frontmatter } = await getPostBySlug(slug);
-  return { title: frontmatter.title, description: frontmatter.description };
+  return {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    alternates: { canonical: `/blog/${slug}` },
+  };
 }
 
 const prose = css({
