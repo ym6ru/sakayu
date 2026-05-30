@@ -19,8 +19,23 @@ const frontmatterSchema = z.object({
 });
 
 export type PostFrontmatter = z.infer<typeof frontmatterSchema>;
-export type PostMeta = PostFrontmatter & { slug: string };
+export type PostMeta = PostFrontmatter & { slug: string; excerpt: string };
 export type Post = { slug: string; frontmatter: PostFrontmatter; content: string };
+
+function toPlainText(markdown: string): string {
+  return markdown
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^>\s?/gm, "")
+    .replace(/^[-*+]\s+/gm, "")
+    .replace(/^\d+\.\s+/gm, "")
+    .replace(/[*_~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 async function readPost(fileName: string): Promise<Post> {
   const slug = fileName.replace(/\.mdx$/, "");
@@ -40,7 +55,11 @@ export async function getAllPosts(): Promise<PostMeta[]> {
   );
   return posts
     .filter((post) => !post.frontmatter.draft)
-    .map((post) => ({ slug: post.slug, ...post.frontmatter }))
+    .map((post) => ({
+      slug: post.slug,
+      ...post.frontmatter,
+      excerpt: toPlainText(post.content).slice(0, 200),
+    }))
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
 

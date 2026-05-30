@@ -1,1 +1,9 @@
 @layer reset, base, tokens, recipes, utilities;
+
+@font-face {
+  font-family: "ellipsis-fallback";
+  src:
+    local("Arial"), local("Helvetica Neue"), local("Segoe UI"), local("Roboto"),
+    local("Liberation Sans");
+  unicode-range: U+2026;
+}
