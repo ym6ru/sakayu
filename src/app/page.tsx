@@ -50,7 +50,7 @@ export default async function Home() {
         })}
       />
 
-      <ul className={css({ listStyle: "none", marginBottom: "20" })}>
+      <ul className={css({ listStyle: "none", marginBottom: "120px" })}>
         {posts.map((post) => (
           <PostListItem key={post.slug} post={post} />
         ))}

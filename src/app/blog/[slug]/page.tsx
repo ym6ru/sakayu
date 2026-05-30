@@ -68,7 +68,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         maxWidth: "content",
         marginInline: "auto",
         paddingInline: "4",
-        marginBottom: "20",
+        marginBottom: "120px",
       })}
     >
       <article>
