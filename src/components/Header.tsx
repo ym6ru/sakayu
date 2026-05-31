@@ -25,16 +25,10 @@ export function Header() {
         position: "sticky",
         top: 0,
         zIndex: 10,
-        backgroundColor: "bg/80",
+        backgroundColor: "bg",
         transition: "transform 0.3s ease",
       })}
-      // Panda の backdropFilter は dev で -webkit- 版しか出さず Chrome で効かないため、
-      // 標準プロパティと -webkit- 版を両方ここで直接指定する
-      style={{
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        transform: hidden ? "translateY(-100%)" : "translateY(0)",
-      }}
+      style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
     >
       <div
         className={css({
