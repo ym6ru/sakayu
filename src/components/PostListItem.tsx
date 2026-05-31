@@ -20,6 +20,7 @@ export function PostListItem({ post }: { post: PostMeta }) {
             fontWeight: "bold",
             lineHeight: "heading",
             color: "text.primary",
+            textWrap: "wrap",
           })}
         >
           {post.title}

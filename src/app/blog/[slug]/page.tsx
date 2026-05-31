@@ -93,6 +93,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             fontWeight: "bold",
             lineHeight: "heading",
             color: "text.primary",
+            textWrap: "wrap",
           })}
         >
           {frontmatter.title}
