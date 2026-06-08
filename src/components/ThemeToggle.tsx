@@ -1,8 +1,28 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { css } from "styled-system/css";
 
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  return () => observer.disconnect();
+}
+
+function getSnapshot(): "light" | "dark" | null {
+  return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+}
+
+function getServerSnapshot(): "light" | "dark" | null {
+  return null;
+}
+
 export function ThemeToggle() {
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
   const toggle = () => {
     const current = document.documentElement.getAttribute("data-theme");
     const next = current === "dark" ? "light" : "dark";
@@ -12,11 +32,19 @@ export function ThemeToggle() {
     } catch {}
   };
 
+  const label =
+    theme === null
+      ? "テーマを切り替える"
+      : theme === "dark"
+        ? "ライトモードに切り替える"
+        : "ダークモードに切り替える";
+
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label="テーマを切り替える"
+      aria-label={label}
+      aria-pressed={theme === null ? undefined : theme === "dark"}
       className={css({
         position: "relative",
         display: "inline-flex",
