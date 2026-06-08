@@ -101,6 +101,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </h1>
 
         <time
+          dateTime={frontmatter.publishedAt}
           className={css({ display: "block", marginTop: "6", fontSize: "sm", color: "text.muted" })}
         >
           {frontmatter.publishedAt.replace(/-/g, ".")}
