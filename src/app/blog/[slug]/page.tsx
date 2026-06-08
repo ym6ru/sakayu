@@ -5,6 +5,7 @@ import { css } from "styled-system/css";
 import { ShareButton } from "@/components/ShareButton";
 import { Profile } from "@/components/Profile";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { siteConfig } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -127,7 +128,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
 
         <div className={css({ marginTop: "6" })}>
-          <ShareButton title={frontmatter.title} />
+          <ShareButton title={frontmatter.title} url={`${siteConfig.url}/blog/${slug}`} />
         </div>
 
         <div className={css({ marginTop: "20" })}>
