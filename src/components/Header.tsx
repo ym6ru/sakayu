@@ -29,6 +29,7 @@ export function Header() {
         transition: "transform 0.3s ease",
       })}
       style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
+      onFocus={() => setHidden(false)}
     >
       <div
         className={css({

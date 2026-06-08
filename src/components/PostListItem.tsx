@@ -36,7 +36,7 @@ export function PostListItem({ post }: { post: PostMeta }) {
             color: "text.muted",
           })}
         >
-          <time>{post.publishedAt.replace(/-/g, ".")}</time>
+          <time dateTime={post.publishedAt}>{post.publishedAt.replace(/-/g, ".")}</time>
           {post.tags.length > 0 && (
             <div className={css({ display: "flex", gap: "2" })}>
               {post.tags.map((tag) => (
