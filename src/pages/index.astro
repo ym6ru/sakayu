@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
-import { Image } from "astro:assets";
-import { formatDate, getPublishedPosts, toExcerpt } from "../lib/posts";
+import PostList from "../components/PostList.astro";
+import { getPublishedPosts } from "../lib/posts";
 
 const contacts = [
   { label: "X", id: "@XpKM4agvDSOfoGp", href: "https://x.com/XpKM4agvDSOfoGp" },
@@ -43,20 +43,9 @@ const posts = (await getPublishedPosts()).slice(0, 5);
         <h2 id="diary">日記</h2>
         <a href="/blog">一覧</a>
       </div>
-      <ul class="posts">
-        {posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}`}>
-              <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
-              <div>
-                <span class="title">{post.data.title}</span>
-                <p>{toExcerpt(post.body)}</p>
-                <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="posts">
+        <PostList posts={posts} />
+      </div>
     </section>
   </main>
 </Base>
@@ -121,55 +110,6 @@ const posts = (await getPublishedPosts()).slice(0, 5);
   }
 
   .posts {
-    gap: var(--space-6);
-  }
-
-  .posts a {
-    display: grid;
-    grid-template-columns: 4rem 1fr;
-    align-items: start;
-    gap: var(--space-4);
-    color: inherit;
-    text-decoration-line: none;
-
-    &:hover .title {
-      text-decoration-line: none;
-    }
-  }
-
-  .posts .title {
-    color: var(--color-primary);
-    font-size: var(--text-md);
-    line-height: var(--leading-normal);
-    letter-spacing: var(--tracking-body);
-    text-decoration-line: underline;
-    text-decoration-thickness: var(--underline-thickness);
-    text-underline-offset: var(--underline-offset);
-  }
-
-  .posts img {
-    box-sizing: content-box;
-    padding: var(--space-2);
-  }
-
-  .posts div {
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .posts time {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-  }
-
-  .posts p {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    overflow: hidden;
-    font-size: var(--text-base);
-    line-height: var(--leading-loose);
-    letter-spacing: var(--tracking-body);
+    margin-block-start: var(--space-5);
   }
 </style>

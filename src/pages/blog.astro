@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import PostList from "../components/PostList.astro";
+import { getPublishedPosts } from "../lib/posts";
+
+const posts = await getPublishedPosts();
+---
+
+<Base title="日記 | sakayu.dev">
+  <main>
+    <h1>日記</h1>
+    <div class="posts">
+      <PostList posts={posts} />
+    </div>
+    <nav aria-label="サイト">
+      <a href="/">トップへ</a>
+    </nav>
+  </main>
+</Base>
+
+<style>
+  main {
+    padding-block-start: var(--space-page);
+  }
+
+  h1 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+  }
+
+  .posts {
+    margin-block-start: var(--space-7);
+  }
+
+  nav {
+    margin-block-start: var(--space-section);
+    font-weight: var(--weight-light);
+  }
+</style>
