@@ -1,0 +1,285 @@
+---
+import Scale from "./Scale.astro";
+import Scales from "./Scales.astro";
+import { Image } from "astro:assets";
+import display from "../assets/display.svg";
+import { formatDate, getPublishedPosts, toExcerpt } from "../lib/posts";
+
+const contacts = [
+  { label: "X", id: "@XpKM4agvDSOfoGp", href: "https://x.com/XpKM4agvDSOfoGp" },
+  { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
+];
+
+const posts = (await getPublishedPosts()).slice(0, 5);
+
+export type Variant = "original" | "a" | "a-motion" | "b" | "c" | "d" | "e";
+
+interface Props {
+  variant?: Variant;
+}
+
+const { variant = "original" } = Astro.props;
+---
+
+<main>
+  {variant === "d" && (
+    <div class="behind-name">
+      <Scales cols={50} rows={6} seed={4} />
+    </div>
+  )}
+  <hgroup>
+    <h1>まつさかゆうき</h1>
+    <p lang="en">Yuki Matsusaka</p>
+  </hgroup>
+  <div class="intro">
+    <p>作ったもの、考えたことを記録しています。</p>
+    <p>
+      ソフトウェアエンジニア。ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。
+    </p>
+    <p>おさかなと植物が好きです。</p>
+  </div>
+  <section aria-labelledby="contact">
+    <h2 id="contact">連絡先</h2>
+    <ul>
+      {contacts.map(({ label, id, href }) => (
+        <li>
+          {label}：
+          <a href={href} target="_blank" rel="me noopener noreferrer">
+            {id}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  {variant === "b" ? (
+    <div class="strip">
+      <Scales cols={14} rows={1} seed={2} />
+    </div>
+  ) : (
+    <hr />
+  )}
+  <section aria-labelledby="diary">
+    <div class="section-heading">
+      <h2 id="diary">日記</h2>
+      <a href="/blog">一覧</a>
+    </div>
+    <ul class="posts">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>
+            <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
+            <div>
+              <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
+              <span class="title">{post.data.title}</span>
+              <p>{toExcerpt(post.body)}</p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  {variant === "original" && <Image src={display} alt="" class="display" />}
+  {variant === "e" && (
+    <section aria-labelledby="mark">
+      <h2 id="mark">鱗1枚をマークに</h2>
+      <div class="marks">
+        <Scale size={128} />
+        <Scale size={64} />
+        <Scale size={32} />
+        <Scale size={16} />
+      </div>
+      <div class="tab">
+        <Scale size={16} />
+        <span>sakayu.dev</span>
+      </div>
+    </section>
+  )}
+</main>
+{(variant === "a" || variant === "a-motion") && (
+  <div class="footer-band">
+    <Scales cols={50} rows={2} seed={3} animate={variant === "a-motion"} />
+  </div>
+)}
+{variant === "c" && (
+  <div class="side">
+    <Scales cols={12} rows={14} seed={5} />
+  </div>
+)}
+
+<style>
+  main {
+    padding-block-start: var(--space-page);
+  }
+
+  h1 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  hgroup p {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-light);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .intro {
+    margin-block-start: var(--space-7);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-loose);
+    letter-spacing: var(--tracking-body);
+  }
+
+  section,
+  hr,
+  .display {
+    margin-block-start: var(--space-section);
+    font-size: var(--text-lg);
+  }
+
+  h2 {
+    font-size: inherit;
+    font-weight: var(--weight-bold);
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-3);
+    margin-block-start: var(--space-5);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-md);
+    font-weight: var(--weight-light);
+    letter-spacing: var(--tracking-body);
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+
+    & a {
+      font-size: var(--text-base);
+      font-weight: var(--weight-light);
+      letter-spacing: var(--tracking-body);
+    }
+  }
+
+  .posts {
+    gap: var(--space-6);
+  }
+
+  .posts a {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    align-items: start;
+    gap: var(--space-4);
+    color: inherit;
+    text-decoration-line: none;
+
+    &:hover .title {
+      text-decoration-line: none;
+    }
+  }
+
+  .posts .title {
+    color: var(--color-primary);
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-body);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--underline-thickness);
+    text-underline-offset: var(--underline-offset);
+  }
+
+  .posts img {
+    box-sizing: content-box;
+    padding: var(--space-2);
+  }
+
+  .posts div {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .posts time {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .posts p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-size: var(--text-base);
+  }
+
+  .display {
+    inline-size: 100%;
+  }
+
+  .footer-band {
+    block-size: 260px;
+    inline-size: 100vw;
+    max-inline-size: none;
+    margin-block: var(--space-section) -6rem;
+    margin-inline-start: calc(-1 * var(--page-inset));
+    mask-image: linear-gradient(to top, #000 30%, transparent);
+  }
+
+  .strip {
+    block-size: 56px;
+    margin-block-start: var(--space-section);
+    mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  }
+
+  .side {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inline-size: calc(100vw - var(--page-inset) - var(--measure) - var(--space-7));
+    max-inline-size: none;
+    mask-image: linear-gradient(to right, transparent, #000 40%);
+
+    @media (width < 75rem) {
+      display: none;
+    }
+  }
+
+  main:has(.behind-name) {
+    position: relative;
+  }
+
+  .behind-name {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: calc(-1 * var(--page-inset));
+    inline-size: 100vw;
+    max-inline-size: none;
+    block-size: calc(var(--space-page) + 12rem);
+    z-index: -1;
+    opacity: 0.6;
+    mask-image: linear-gradient(to bottom, #000, transparent);
+  }
+
+  .marks {
+    display: flex;
+    align-items: end;
+    gap: var(--space-5);
+    margin-block-start: var(--space-5);
+  }
+
+  .tab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-5);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem 0.5rem 0 0;
+    font-size: var(--text-sm);
+  }
+</style>

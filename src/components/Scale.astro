@@ -1,0 +1,25 @@
+---
+interface Props {
+  size: number;
+  color?: string;
+}
+
+const { size, color = "0 0 255" } = Astro.props;
+---
+
+<i style={`--size: ${size}px; --c: ${color}`} aria-hidden="true"></i>
+
+<style>
+  i {
+    display: block;
+    inline-size: var(--size);
+    block-size: var(--size);
+    box-sizing: border-box;
+    border: calc(var(--size) * 3 / 105) solid transparent;
+    border-radius: 50%;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0)) border-box;
+    box-shadow: 0 0 calc(var(--size) / 7) rgb(0 0 255 / 10%);
+  }
+</style>

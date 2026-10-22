@@ -1,0 +1,15 @@
+---
+import Base from "../../layouts/Base.astro";
+import Home, { type Variant } from "../../components/Home.astro";
+
+export function getStaticPaths() {
+  const variants: Variant[] = ["original", "a", "a-motion", "b", "c", "d", "e"];
+  return variants.map((variant) => ({ params: { variant }, props: { variant } }));
+}
+
+const { variant } = Astro.props;
+---
+
+<Base title={`lab: ${variant}`}>
+  <Home variant={variant} />
+</Base>

@@ -1,0 +1,97 @@
+---
+interface Props {
+  cols: number;
+  rows: number;
+  seed?: number;
+  animate?: boolean;
+}
+
+const { cols, rows, seed = 1, animate = false } = Astro.props;
+
+const palette = [
+  { color: "0 0 255", weight: 50 },
+  { color: "220 220 255", weight: 22 },
+  { color: "112 112 255", weight: 17 },
+  { color: "0 0 128", weight: 11 },
+];
+const total = palette.reduce((sum, { weight }) => sum + weight, 0);
+
+let state = seed;
+const random = () => {
+  state = (state * 1664525 + 1013904223) % 4294967296;
+  return state / 4294967296;
+};
+const pick = () => {
+  let point = random() * total;
+  for (const { color, weight } of palette) {
+    point -= weight;
+    if (point < 0) return color;
+  }
+  return palette[0].color;
+};
+
+const scales = [];
+for (let col = 0; col < cols; col++) {
+  const offset = col % 2 === 0 ? -52.5 : 0;
+  for (let row = 0; row <= rows; row++) {
+    scales.push({
+      x: 52.5 + col * 52.5,
+      y: offset + row * 98,
+      color: pick(),
+      delay: random() * -12,
+    });
+  }
+}
+---
+
+<div class:list={["scales", { animate }]} aria-hidden="true">
+  {scales.map(({ x, y, color, delay }) => (
+    <i style={`--x: ${x}px; --y: ${y}px; --c: ${color}; --delay: ${delay.toFixed(2)}s`} />
+  ))}
+</div>
+
+<style>
+  @property --from {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 180deg;
+  }
+
+  .scales {
+    position: relative;
+    block-size: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  i {
+    position: absolute;
+    inset-inline-start: calc(var(--x) - 52.5px);
+    inset-block-start: calc(var(--y) - 52.5px);
+    inline-size: 105px;
+    block-size: 105px;
+    box-sizing: border-box;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      conic-gradient(from var(--from), rgb(var(--c)), rgb(var(--c) / 0)) border-box;
+    box-shadow: 0 0 15px rgb(0 0 255 / 10%);
+  }
+
+  .animate i {
+    animation: turn 12s linear var(--delay) infinite;
+  }
+
+  @keyframes turn {
+    to {
+      --from: 540deg;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate i {
+      animation: none;
+    }
+  }
+</style>
