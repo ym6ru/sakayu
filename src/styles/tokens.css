@@ -29,6 +29,7 @@
 
   --measure: 42rem;
   --gutter: clamp(1.25rem, 0.68rem + 2.27vw, 2.5rem);
+  --page-inset: min(20rem, max(50vw - var(--measure) / 2, var(--gutter)));
 
   --color-bg: #ffffff;
   --color-text: #171717;

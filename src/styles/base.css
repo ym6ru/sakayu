@@ -25,6 +25,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  padding-inline: var(--page-inset);
+}
+
+body > * {
+  max-inline-size: var(--measure);
 }
 
 h1,
