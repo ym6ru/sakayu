@@ -63,6 +63,11 @@ svg {
   height: auto;
 }
 
+hr {
+  border: none;
+  border-block-start: 1px solid var(--color-line);
+}
+
 time {
   font-variant-numeric: tabular-nums;
 }
