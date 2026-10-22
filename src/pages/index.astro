@@ -1,5 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
+
+const contacts = [
+  { label: "X", id: "@XpKM4agvDSOfoGp", href: "https://x.com/XpKM4agvDSOfoGp" },
+  { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
+];
 ---
 
 <Base title="sakayu.dev">
@@ -15,6 +20,19 @@ import Base from "../layouts/Base.astro";
       </p>
       <p>おさかなと植物が好きです。</p>
     </div>
+    <section aria-labelledby="contact">
+      <h2 id="contact">連絡先</h2>
+      <ul>
+        {contacts.map(({ label, id, href }) => (
+          <li>
+            {label}：
+            <a href={href} target="_blank" rel="me noopener noreferrer">
+              {id}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
   </main>
 </Base>
 
@@ -40,6 +58,23 @@ import Base from "../layouts/Base.astro";
     font-size: var(--text-lg);
     font-weight: var(--weight-light);
     line-height: var(--leading-loose);
+    letter-spacing: var(--tracking-body);
+  }
+
+  section {
+    margin-block-start: var(--space-section);
+    font-size: var(--text-lg);
+  }
+
+  h2 {
+    font-size: inherit;
+    font-weight: var(--weight-bold);
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    font-weight: var(--weight-light);
     letter-spacing: var(--tracking-body);
   }
 </style>

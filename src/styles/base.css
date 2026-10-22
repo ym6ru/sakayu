@@ -50,6 +50,10 @@ a {
   color: var(--color-primary);
   text-decoration-thickness: 0.05em;
   text-underline-offset: 0.3em;
+
+  &:hover {
+    text-decoration-line: none;
+  }
 }
 
 img,
