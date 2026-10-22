@@ -47,7 +47,7 @@ const posts = (await getPublishedPosts()).slice(0, 5);
         {posts.map((post) => (
           <li>
             <a href={`/blog/${post.id}`}>
-              <Image src={post.data.icon} alt="" width={64} height={64} densities={[1, 2, 3]} />
+              <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
               <div>
                 <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
                 <span class="title">{post.data.title}</span>
@@ -135,6 +135,11 @@ const posts = (await getPublishedPosts()).slice(0, 5);
     &:hover .title {
       text-decoration-line: underline;
     }
+  }
+
+  .posts img {
+    box-sizing: content-box;
+    padding: var(--space-2);
   }
 
   .posts div {
