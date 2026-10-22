@@ -6,91 +6,56 @@ const colors = {
   navy: "0 0 128",
 };
 
-const scales: [number, number, keyof typeof colors][] = [
-  [52.5, -52.5, "blue"],
-  [52.5, 45.5, "pale"],
-  [52.5, 143.5, "blue"],
-  [52.5, 241.5, "blue"],
-  [105, 0, "blue"],
-  [105, 98, "light"],
-  [105, 196, "pale"],
-  [105, 294, "blue"],
-  [157.5, -52.5, "blue"],
-  [157.5, 45.5, "pale"],
-  [157.5, 143.5, "navy"],
-  [157.5, 241.5, "blue"],
-  [210, 0, "navy"],
-  [210, 98, "blue"],
-  [210, 196, "pale"],
-  [210, 294, "blue"],
-  [262.5, -52.5, "blue"],
-  [262.5, 45.5, "light"],
-  [262.5, 143.5, "pale"],
-  [262.5, 241.5, "blue"],
-  [315, 0, "pale"],
-  [315, 98, "blue"],
-  [315, 196, "light"],
-  [315, 294, "blue"],
-  [367.5, -52.5, "blue"],
-  [367.5, 45.5, "light"],
-  [367.5, 143.5, "navy"],
-  [367.5, 241.5, "light"],
-  [420, 0, "blue"],
-  [420, 98, "light"],
-  [420, 196, "blue"],
-  [420, 294, "blue"],
-  [474.25, -52.5, "blue"],
-  [474.25, 45.5, "navy"],
-  [474.25, 143.5, "pale"],
-  [474.25, 241.5, "blue"],
-  [526.75, 0, "light"],
-  [526.75, 98, "pale"],
-  [526.75, 196, "navy"],
-  [526.75, 294, "blue"],
-  [581, -52.5, "blue"],
-  [581, 45.5, "pale"],
-  [581, 143.5, "blue"],
-  [581, 241.5, "light"],
-  [631.75, 0, "blue"],
-  [631.75, 98, "pale"],
-  [631.75, 196, "light"],
-  [631.75, 294, "blue"],
-  [686, -52.5, "blue"],
-  [686, 45.5, "pale"],
-  [686, 143.5, "blue"],
-  [686, 241.5, "pale"],
+const pattern: (keyof typeof colors)[][] = [
+  ["blue", "pale", "blue", "blue"],
+  ["blue", "light", "pale", "blue"],
+  ["blue", "pale", "navy", "blue"],
+  ["navy", "blue", "pale", "blue"],
+  ["blue", "light", "pale", "blue"],
+  ["pale", "blue", "light", "blue"],
+  ["blue", "light", "navy", "light"],
+  ["blue", "light", "blue", "blue"],
+  ["blue", "navy", "pale", "blue"],
+  ["light", "pale", "navy", "blue"],
+  ["blue", "pale", "blue", "light"],
+  ["blue", "pale", "light", "blue"],
 ];
+
+const columns = 52;
+const scales = Array.from({ length: columns }, (_, col) =>
+  pattern[col % pattern.length].map((color, row) => ({
+    x: col * 52.5,
+    y: (col % 2 === 0 ? -105 : -52.5) + row * 98,
+    color: colors[color],
+  })),
+).flat();
 ---
 
 <div class="scales" aria-hidden="true">
-  {scales.map(([x, y, color]) => (
-    <i style={`--x: ${x}; --y: ${y}; --c: ${colors[color]}`} />
+  {scales.map(({ x, y, color }) => (
+    <i style={`--x: ${x}px; --y: ${y}px; --c: ${color}`} />
   ))}
 </div>
 
 <style>
   .scales {
-    --u: calc(100cqi / 672);
-
     position: relative;
-    aspect-ratio: 672 / 228;
+    block-size: 228px;
     overflow: hidden;
-    border-radius: 20px;
-    container-type: inline-size;
   }
 
   i {
     position: absolute;
-    inset-inline-start: calc((var(--x) - 52.5) * var(--u));
-    inset-block-start: calc((var(--y) - 52.5) * var(--u));
-    inline-size: calc(105 * var(--u));
-    block-size: calc(105 * var(--u));
+    inset-inline-start: var(--x);
+    inset-block-start: var(--y);
+    inline-size: 105px;
+    block-size: 105px;
     box-sizing: border-box;
-    border: calc(3 * var(--u)) solid transparent;
+    border: 3px solid transparent;
     border-radius: 50%;
     background:
       linear-gradient(#fff, #fff) padding-box,
       conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0%)) border-box;
-    box-shadow: 0 0 calc(15 * var(--u)) rgb(0 0 255 / 10%);
+    box-shadow: 0 0 15px rgb(0 0 255 / 10%);
   }
 </style>
