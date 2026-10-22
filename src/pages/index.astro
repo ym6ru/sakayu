@@ -1,113 +1,20 @@
 ---
 import Base from "../layouts/Base.astro";
-
-const textSizes = [
-  ["--text-xl", "48px 見出し"],
-  ["--text-lg", "24px 記事タイトル"],
-  ["--text-md", "20px リード文"],
-  ["--text-base", "16px 本文 Body text"],
-  ["--text-sm", "14px 補足 2026.10.22"],
-];
-
-const weights = [
-  ["--weight-light", "300 Light 静かな文字組み"],
-  ["--weight-regular", "400 Regular 静かな文字組み"],
-  ["--weight-bold", "600 SemiBold 静かな文字組み"],
-];
-
-const spaces = [
-  "--space-1",
-  "--space-2",
-  "--space-3",
-  "--space-4",
-  "--space-5",
-  "--space-6",
-  "--space-section",
-  "--space-page",
-];
-
-const colors = [
-  "--color-bg",
-  "--color-text",
-  "--color-text-muted",
-  "--color-primary",
-  "--color-line",
-];
 ---
 
-<Base title="Design tokens">
+<Base title="sakayu.dev">
   <main>
-    <header>
-      <p class="muted">Design tokens — draft</p>
-      <h1>静かで読みやすい文字組みのための、ちいさな約束ごと。</h1>
-    </header>
-
-    <section>
-      <h2>Type scale</h2>
-      <ul class="scale">
-        {textSizes.map(([token, label]) => (
-          <li>
-            <code>{token}</code>
-            <span style={`font-size: var(${token})`}>{label}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section>
-      <h2>Weight</h2>
-      <ul class="scale">
-        {weights.map(([token, label]) => (
-          <li>
-            <code>{token}</code>
-            <span style={`font-weight: var(${token})`}>{label}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section>
-      <h2>Article</h2>
-      <article>
-        <p class="muted">
-          <time datetime="2026-10-22">2026.10.22</time>
-        </p>
-        <h3>モダンさより、何が本当に大事か</h3>
-        <p>
-          以前は新しい技術を使うことばかり考えていました。けれど、読む人にとって大切なのは、ページがすぐに開いて、文字が心地よく目に入ってくることです。Gen
-          Interface JP は Inter と Noto Sans JP をもとにした書体で、和文と欧文 Typography
-          の混植でもリズムが崩れにくいのが特徴です。
-        </p>
-        <p>
-          行間は 2 と 1.75 の二種類。本文の幅は <a href="/blog">42rem</a> に抑え、一行がおよそ 40
-          文字に収まるようにしています。
-        </p>
-      </article>
-    </section>
-
-    <section>
-      <h2>Spacing</h2>
-      <ul class="spaces">
-        {spaces.map((token) => (
-          <li>
-            <code>{token}</code>
-            <span class="bar" style={`inline-size: var(${token})`} />
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section>
-      <h2>Color</h2>
-      <ul class="colors">
-        {colors.map((token) => (
-          <li>
-            <span class="swatch" style={`background: var(${token})`} />
-            <code>{token}</code>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <hgroup>
+      <h1>まつさかゆうき</h1>
+      <p lang="en">Yuki Matsusaka</p>
+    </hgroup>
+    <div class="intro">
+      <p>作ったもの、考えたことを記録しています。</p>
+      <p>
+        ソフトウェアエンジニア。ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。
+      </p>
+      <p>おさかなと植物が好きです。</p>
+    </div>
   </main>
 </Base>
 
@@ -115,86 +22,25 @@ const colors = [
   main {
     max-inline-size: calc(var(--measure) + var(--gutter) * 2);
     margin-inline: auto;
-    padding: var(--space-page) var(--gutter);
+    padding: var(--space-page) var(--gutter) 0;
   }
 
-  header h1 {
+  h1 {
     font-size: var(--text-xl);
-    margin-block-start: var(--space-3);
-  }
-
-  section {
-    margin-block-start: var(--space-section);
-  }
-
-  h2 {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    font-weight: var(--weight-regular);
     letter-spacing: var(--tracking-wide);
-    margin-block-end: var(--space-5);
   }
 
-  ul {
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: var(--space-4);
-  }
-
-  code {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-  }
-
-  .scale li {
-    display: grid;
-    gap: var(--space-1);
-  }
-
-  .scale span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .muted {
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-  }
-
-  article {
-    line-height: var(--leading-loose);
-  }
-
-  article h3 {
+  hgroup p {
     font-size: var(--text-lg);
-    margin-block: var(--space-2) var(--space-5);
+    font-weight: var(--weight-light);
+    letter-spacing: var(--tracking-wide);
   }
 
-  article p + p {
-    margin-block-start: var(--space-4);
-  }
-
-  .spaces li {
-    display: grid;
-    gap: var(--space-1);
-  }
-
-  .bar {
-    display: block;
-    max-inline-size: 100%;
-    block-size: var(--space-2);
-    background: var(--color-text);
-  }
-
-  .colors {
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-  }
-
-  .swatch {
-    display: block;
-    aspect-ratio: 1;
-    border: 1px solid var(--color-line);
-    margin-block-end: var(--space-2);
+  .intro {
+    margin-block-start: var(--space-6);
+    font-size: var(--text-lg);
+    line-height: var(--leading-loose);
+    letter-spacing: var(--tracking-body);
   }
 </style>
