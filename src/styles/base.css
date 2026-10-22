@@ -27,6 +27,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   padding-inline: var(--page-inset);
+  transition: opacity 0.3s ease-out;
+}
+
+html.fonts-loading body {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
 }
 
 body > * {
