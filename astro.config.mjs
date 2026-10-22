@@ -6,4 +6,7 @@ export default defineConfig({
   trailingSlash: "never",
   outDir: "./out",
   integrations: [mdx()],
+  image: {
+    service: { entrypoint: "astro/assets/services/sharp", config: { webp: { lossless: true } } },
+  },
 });
