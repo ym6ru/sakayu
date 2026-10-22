@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://sakayu.dev",
   trailingSlash: "never",
+  build: { format: "file" },
   outDir: "./out",
   integrations: [mdx()],
   image: {
