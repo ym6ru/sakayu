@@ -5,6 +5,7 @@ import "gen-interface-jp/600.css";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import Footer from "../components/Footer.astro";
+import Scales from "../components/Scales.astro";
 
 interface Props {
   title: string;
@@ -22,5 +23,17 @@ const { title } = Astro.props;
   <body>
     <slot />
     <Footer />
+    <div class="scales">
+      <Scales />
+    </div>
   </body>
 </html>
+
+<style>
+  .scales {
+    inline-size: 100vw;
+    max-inline-size: none;
+    margin-block-start: 7.5rem;
+    margin-inline-start: calc(-1 * var(--page-inset));
+  }
+</style>

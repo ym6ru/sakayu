@@ -1,0 +1,62 @@
+---
+const colors = {
+  blue: "0 0 255",
+  light: "112 112 255",
+  pale: "220 220 255",
+  navy: "0 0 128",
+};
+
+const pattern: (keyof typeof colors)[][] = [
+  ["blue", "pale", "blue", "blue"],
+  ["blue", "light", "pale", "blue"],
+  ["blue", "pale", "navy", "blue"],
+  ["navy", "blue", "pale", "blue"],
+  ["blue", "light", "pale", "blue"],
+  ["pale", "blue", "light", "blue"],
+  ["blue", "light", "navy", "light"],
+  ["blue", "light", "blue", "blue"],
+  ["blue", "navy", "pale", "blue"],
+  ["light", "pale", "navy", "blue"],
+  ["blue", "pale", "blue", "light"],
+  ["blue", "pale", "light", "blue"],
+];
+
+const columns = 52;
+const scales = Array.from({ length: columns }, (_, col) =>
+  pattern[col % pattern.length].map((color, row) => ({
+    x: col * 52.5,
+    y: (col % 2 === 0 ? -105 : -52.5) + row * 98,
+    color: colors[color],
+  })),
+).flat();
+---
+
+<div class="scales" aria-hidden="true">
+  {scales.map(({ x, y, color }) => (
+    <i style={`--x: ${x}px; --y: ${y}px; --c: ${color}`} />
+  ))}
+</div>
+
+<style>
+  .scales {
+    position: relative;
+    block-size: 228px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, #000 50px);
+  }
+
+  i {
+    position: absolute;
+    inset-inline-start: var(--x);
+    inset-block-start: var(--y);
+    inline-size: 105px;
+    block-size: 105px;
+    box-sizing: border-box;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0%)) border-box;
+    box-shadow: 0 0 15px rgb(0 0 255 / 10%);
+  }
+</style>
