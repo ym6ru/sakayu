@@ -10,5 +10,5 @@ export default defineConfig([
   ...astro.configs.recommended,
   ...astro.configs["jsx-a11y-recommended"],
   eslintConfigPrettier,
-  globalIgnores(["dist/**", ".astro/**"]),
+  globalIgnores(["dist/**", "out/**", ".astro/**"]),
 ]);
