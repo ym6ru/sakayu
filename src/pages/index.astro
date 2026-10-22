@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { Image } from "astro:assets";
-import display from "../assets/display.svg";
+import Scales from "../components/Scales.astro";
 import { formatDate, getPublishedPosts, toExcerpt } from "../lib/posts";
 
 const contacts = [
@@ -59,7 +59,9 @@ const posts = (await getPublishedPosts()).slice(0, 5);
         ))}
       </ul>
     </section>
-    <Image src={display} alt="" class="display" />
+    <div class="display">
+      <Scales />
+    </div>
   </main>
 </Base>
 

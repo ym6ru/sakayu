@@ -1,0 +1,95 @@
+---
+const colors = {
+  blue: "0 0 255",
+  light: "112 112 255",
+  pale: "220 220 255",
+  navy: "0 0 128",
+};
+
+const scales: [number, number, keyof typeof colors][] = [
+  [52.5, -52.5, "blue"],
+  [52.5, 45.5, "pale"],
+  [52.5, 143.5, "blue"],
+  [52.5, 241.5, "blue"],
+  [105, 0, "blue"],
+  [105, 98, "light"],
+  [105, 196, "pale"],
+  [105, 294, "blue"],
+  [157.5, -52.5, "blue"],
+  [157.5, 45.5, "pale"],
+  [157.5, 143.5, "navy"],
+  [157.5, 241.5, "blue"],
+  [210, 0, "navy"],
+  [210, 98, "blue"],
+  [210, 196, "pale"],
+  [210, 294, "blue"],
+  [262.5, -52.5, "blue"],
+  [262.5, 45.5, "light"],
+  [262.5, 143.5, "pale"],
+  [262.5, 241.5, "blue"],
+  [315, 0, "pale"],
+  [315, 98, "blue"],
+  [315, 196, "light"],
+  [315, 294, "blue"],
+  [367.5, -52.5, "blue"],
+  [367.5, 45.5, "light"],
+  [367.5, 143.5, "navy"],
+  [367.5, 241.5, "light"],
+  [420, 0, "blue"],
+  [420, 98, "light"],
+  [420, 196, "blue"],
+  [420, 294, "blue"],
+  [474.25, -52.5, "blue"],
+  [474.25, 45.5, "navy"],
+  [474.25, 143.5, "pale"],
+  [474.25, 241.5, "blue"],
+  [526.75, 0, "light"],
+  [526.75, 98, "pale"],
+  [526.75, 196, "navy"],
+  [526.75, 294, "blue"],
+  [581, -52.5, "blue"],
+  [581, 45.5, "pale"],
+  [581, 143.5, "blue"],
+  [581, 241.5, "light"],
+  [631.75, 0, "blue"],
+  [631.75, 98, "pale"],
+  [631.75, 196, "light"],
+  [631.75, 294, "blue"],
+  [686, -52.5, "blue"],
+  [686, 45.5, "pale"],
+  [686, 143.5, "blue"],
+  [686, 241.5, "pale"],
+];
+---
+
+<div class="scales" aria-hidden="true">
+  {scales.map(([x, y, color]) => (
+    <i style={`--x: ${x}; --y: ${y}; --c: ${colors[color]}`} />
+  ))}
+</div>
+
+<style>
+  .scales {
+    --u: calc(100cqi / 672);
+
+    position: relative;
+    aspect-ratio: 672 / 228;
+    overflow: hidden;
+    container-type: inline-size;
+  }
+
+  i {
+    position: absolute;
+    inset-inline-start: calc((var(--x) - 52.5) * var(--u));
+    inset-block-start: calc((var(--y) - 52.5) * var(--u));
+    inline-size: calc(105 * var(--u));
+    block-size: calc(105 * var(--u));
+    box-sizing: border-box;
+    border: calc(3 * var(--u)) solid transparent;
+    border-radius: 50%;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0%)) border-box;
+    box-shadow: 0 0 calc(15 * var(--u)) rgb(0 0 255 / 10%);
+  }
+</style>
