@@ -48,8 +48,8 @@ p {
 
 a {
   color: var(--color-primary);
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.4em;
+  text-decoration-thickness: var(--underline-thickness);
+  text-underline-offset: var(--underline-offset);
 
   &:hover {
     text-decoration-line: none;
