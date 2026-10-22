@@ -1,0 +1,40 @@
+:root {
+  --font-sans: "Gen Interface JP", system-ui, sans-serif;
+
+  --weight-regular: 400;
+  --weight-bold: 600;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: clamp(1.0625rem, 0.98rem + 0.36vw, 1.25rem);
+  --text-lg: clamp(1.25rem, 1.14rem + 0.45vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.27rem + 0.91vw, 2rem);
+  --text-2xl: clamp(2rem, 1.55rem + 1.82vw, 3rem);
+  --text-display: clamp(2.5rem, 1.48rem + 4.09vw, 4.75rem);
+
+  --leading-tight: 1.4;
+  --leading-normal: 1.75;
+  --leading-loose: 2;
+
+  --tracking-tight: 0.02em;
+  --tracking-normal: 0.04em;
+  --tracking-wide: 0.08em;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-section: clamp(5rem, 2.73rem + 9.09vw, 10rem);
+  --space-page: clamp(8rem, 2.55rem + 21.82vw, 20rem);
+
+  --measure: 42rem;
+  --gutter: clamp(1.25rem, 0.68rem + 2.27vw, 2.5rem);
+
+  --color-bg: #fdfdfc;
+  --color-text: #171717;
+  --color-text-muted: #6b6b6b;
+  --color-link: #0064ca;
+  --color-line: #e5e5e5;
+}
