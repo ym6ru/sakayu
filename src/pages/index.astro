@@ -49,9 +49,9 @@ const posts = (await getPublishedPosts()).slice(0, 5);
             <a href={`/blog/${post.id}`}>
               <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
               <div>
-                <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
                 <span class="title">{post.data.title}</span>
                 <p>{toExcerpt(post.body)}</p>
+                <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
               </div>
             </a>
           </li>
