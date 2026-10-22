@@ -16,7 +16,10 @@ const blog = defineCollection({
     z.object({
       title: z.string().min(1),
       description: z.string().min(1),
-      icon: image(),
+      icon: z.preprocess(
+        (name) => (typeof name === "string" ? `./icons/${name}.png` : name),
+        image(),
+      ),
       publishedAt: dateString,
       updatedAt: dateString.optional(),
       tags: z.array(z.string()).default([]),

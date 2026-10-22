@@ -47,7 +47,7 @@ const posts = (await getPublishedPosts()).slice(0, 5);
         {posts.map((post) => (
           <li>
             <a href={`/blog/${post.id}`}>
-              <Image src={post.data.icon} alt="" width={64} height={64} />
+              <Image src={post.data.icon} alt="" width={64} height={64} densities={[1, 2]} />
               <div>
                 <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
                 <span class="title">{post.data.title}</span>
