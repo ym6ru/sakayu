@@ -8,3 +8,20 @@ export async function getPublishedPosts() {
 export function formatDate(date: string) {
   return date.replaceAll("-", ".");
 }
+
+export function toExcerpt(markdown = "", length = 120) {
+  const text = markdown
+    .replace(/^import .*$/gm, "")
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]+>/g, "")
+    .replace(/^#{1,6}\s+.*$/gm, "")
+    .replace(/^>\s?/gm, "")
+    .replace(/^\s*(?:[-*+]|\d+\.)\s+/gm, "")
+    .replace(/[*_~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.length > length ? `${text.slice(0, length)}…` : text;
+}

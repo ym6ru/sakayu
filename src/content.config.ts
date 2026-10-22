@@ -12,14 +12,16 @@ const dateString = z
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./content/blog" }),
-  schema: z.object({
-    title: z.string().min(1),
-    description: z.string().min(1),
-    publishedAt: dateString,
-    updatedAt: dateString.optional(),
-    tags: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string().min(1),
+      description: z.string().min(1),
+      icon: image(),
+      publishedAt: dateString,
+      updatedAt: dateString.optional(),
+      tags: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+    }),
 });
 
 export const collections = { blog };

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
-import { formatDate, getPublishedPosts } from "../lib/posts";
+import { Image } from "astro:assets";
+import { formatDate, getPublishedPosts, toExcerpt } from "../lib/posts";
 
 const contacts = [
   { label: "X", id: "@XpKM4agvDSOfoGp", href: "https://x.com/XpKM4agvDSOfoGp" },
@@ -46,8 +47,12 @@ const posts = (await getPublishedPosts()).slice(0, 5);
         {posts.map((post) => (
           <li>
             <a href={`/blog/${post.id}`}>
-              <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
-              <span>{post.data.title}</span>
+              <Image src={post.data.icon} alt="" width={64} height={64} />
+              <div>
+                <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
+                <span class="title">{post.data.title}</span>
+                <p>{toExcerpt(post.body)}</p>
+              </div>
             </a>
           </li>
         ))}
@@ -115,19 +120,40 @@ const posts = (await getPublishedPosts()).slice(0, 5);
     }
   }
 
+  .posts {
+    gap: var(--space-6);
+  }
+
   .posts a {
     display: grid;
-    gap: var(--space-1);
+    grid-template-columns: 4rem 1fr;
+    align-items: start;
+    gap: var(--space-4);
     color: inherit;
     text-decoration-line: none;
 
-    &:hover span {
+    &:hover .title {
       text-decoration-line: underline;
     }
   }
 
+  .posts div {
+    display: grid;
+    gap: var(--space-1);
+  }
+
   .posts time {
     font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .posts p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-size: var(--text-base);
     color: var(--color-text-muted);
   }
 </style>
