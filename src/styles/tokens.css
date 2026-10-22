@@ -1,0 +1,38 @@
+:root {
+  --font-sans: "Gen Interface JP", system-ui, sans-serif;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-bold: 600;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.5rem;
+  --text-xl: 3rem;
+
+  --leading-normal: 1.75;
+  --leading-loose: 2;
+
+  --tracking-title: 0.03em;
+  --tracking-body: 0.06em;
+  --tracking-wide: 0.1em;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-section: clamp(5rem, 2.73rem + 9.09vw, 10rem);
+  --space-page: clamp(8rem, 2.55rem + 21.82vw, 20rem);
+
+  --measure: 42rem;
+  --gutter: clamp(1.25rem, 0.68rem + 2.27vw, 2.5rem);
+
+  --color-bg: #ffffff;
+  --color-text: #171717;
+  --color-text-muted: rgb(23 23 23 / 50%);
+  --color-primary: #0000ff;
+  --color-line: rgb(23 23 23 / 50%);
+}
