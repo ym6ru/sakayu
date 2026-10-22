@@ -3,7 +3,19 @@ import Base from "../../layouts/Base.astro";
 import Home, { type Variant } from "../../components/Home.astro";
 
 export function getStaticPaths() {
-  const variants: Variant[] = ["original", "a", "a-motion", "b", "c", "d", "e"];
+  const variants: Variant[] = [
+    "original",
+    "a",
+    "a-motion",
+    "b",
+    "c",
+    "d",
+    "e",
+    "s1",
+    "s2",
+    "s4",
+    "s5",
+  ];
   return variants.map((variant) => ({ params: { variant }, props: { variant } }));
 }
 

@@ -12,13 +12,15 @@ const contacts = [
 
 const posts = (await getPublishedPosts()).slice(0, 5);
 
-export type Variant = "original" | "a" | "a-motion" | "b" | "c" | "d" | "e";
+export type Variant =
+  "original" | "a" | "a-motion" | "b" | "c" | "d" | "e" | "s1" | "s2" | "s4" | "s5";
 
 interface Props {
   variant?: Variant;
 }
 
 const { variant = "original" } = Astro.props;
+const scaledIcon = variant === "s1" || variant === "s2" || variant === "s4";
 ---
 
 <main>
@@ -36,7 +38,19 @@ const { variant = "original" } = Astro.props;
     <p>
       ソフトウェアエンジニア。ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。
     </p>
-    <p>おさかなと植物が好きです。</p>
+    {variant === "s5" ? (
+      <p>
+        <span class="osakana">
+          おさかな
+          <span class="splash" aria-hidden="true">
+            <Scales cols={9} rows={2} size={40} seed={9} />
+          </span>
+        </span>
+        と植物が好きです。
+      </p>
+    ) : (
+      <p>おさかなと植物が好きです。</p>
+    )}
   </div>
   <section aria-labelledby="contact">
     <h2 id="contact">連絡先</h2>
@@ -63,11 +77,22 @@ const { variant = "original" } = Astro.props;
       <h2 id="diary">日記</h2>
       <a href="/blog">一覧</a>
     </div>
-    <ul class="posts">
+    <ul class:list={["posts", { body: variant === "s2" }]}>
+      {variant === "s2" && (
+        <li class="spine" aria-hidden="true">
+          <Scales cols={3} rows={12} size={64} seed={7} />
+        </li>
+      )}
       {posts.map((post) => (
         <li>
           <a href={`/blog/${post.id}`}>
-            <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
+            {scaledIcon ? (
+              <Scale size={64} reveal={variant === "s4"}>
+                <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
+              </Scale>
+            ) : (
+              <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
+            )}
             <div>
               <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
               <span class="title">{post.data.title}</span>
@@ -281,5 +306,50 @@ const { variant = "original" } = Astro.props;
     border: 1px solid var(--color-line);
     border-radius: 0.5rem 0.5rem 0 0;
     font-size: var(--text-sm);
+  }
+
+  .posts.body {
+    position: relative;
+  }
+
+  .spine {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -4rem;
+    inline-size: 6rem;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 70%, transparent);
+  }
+
+  .osakana {
+    position: relative;
+    cursor: default;
+  }
+
+  .splash {
+    position: absolute;
+    inset-inline-start: 50%;
+    inset-block-start: 50%;
+    inline-size: 14rem;
+    block-size: 7rem;
+    translate: -50% -50%;
+    z-index: -1;
+    opacity: 0;
+    scale: 0.6;
+    mask-image: radial-gradient(closest-side, #000 40%, transparent);
+    transition:
+      opacity 0.5s ease-out,
+      scale 0.5s ease-out;
+  }
+
+  .osakana:hover .splash {
+    opacity: 1;
+    scale: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .splash {
+      transition: none;
+    }
   }
 </style>

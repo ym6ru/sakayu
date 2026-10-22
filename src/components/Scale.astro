@@ -2,16 +2,26 @@
 interface Props {
   size: number;
   color?: string;
+  reveal?: boolean;
 }
 
-const { size, color = "0 0 255" } = Astro.props;
+const { size, color = "0 0 255", reveal = false } = Astro.props;
 ---
 
-<i style={`--size: ${size}px; --c: ${color}`} aria-hidden="true"></i>
+<span class:list={["scale", { reveal }]} style={`--size: ${size}px; --c: ${color}`}>
+  <slot />
+</span>
 
 <style>
-  i {
-    display: block;
+  @property --sweep {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 360deg;
+  }
+
+  .scale {
+    display: grid;
+    place-items: center;
     inline-size: var(--size);
     block-size: var(--size);
     box-sizing: border-box;
@@ -19,7 +29,26 @@ const { size, color = "0 0 255" } = Astro.props;
     border-radius: 50%;
     background:
       linear-gradient(#fff, #fff) padding-box,
-      conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0)) border-box;
+      conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0) var(--sweep)) border-box;
     box-shadow: 0 0 calc(var(--size) / 7) rgb(0 0 255 / 10%);
+  }
+
+  .reveal {
+    --sweep: 0deg;
+    box-shadow: 0 0 0 rgb(0 0 255 / 0%);
+    transition:
+      --sweep 0.6s ease-out,
+      box-shadow 0.6s ease-out;
+  }
+
+  :global(:is(a:hover, a:focus-visible)) .reveal {
+    --sweep: 360deg;
+    box-shadow: 0 0 calc(var(--size) / 7) rgb(0 0 255 / 10%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      transition: none;
+    }
   }
 </style>

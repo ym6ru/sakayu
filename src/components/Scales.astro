@@ -2,11 +2,14 @@
 interface Props {
   cols: number;
   rows: number;
+  size?: number;
   seed?: number;
   animate?: boolean;
 }
 
-const { cols, rows, seed = 1, animate = false } = Astro.props;
+const { cols, rows, size = 105, seed = 1, animate = false } = Astro.props;
+const half = size / 2;
+const step = (size * 98) / 105;
 
 const palette = [
   { color: "0 0 255", weight: 50 },
@@ -32,11 +35,11 @@ const pick = () => {
 
 const scales = [];
 for (let col = 0; col < cols; col++) {
-  const offset = col % 2 === 0 ? -52.5 : 0;
+  const offset = col % 2 === 0 ? -half : 0;
   for (let row = 0; row <= rows; row++) {
     scales.push({
-      x: 52.5 + col * 52.5,
-      y: offset + row * 98,
+      x: half + col * half,
+      y: offset + row * step,
       color: pick(),
       delay: random() * -12,
     });
@@ -44,7 +47,7 @@ for (let col = 0; col < cols; col++) {
 }
 ---
 
-<div class:list={["scales", { animate }]} aria-hidden="true">
+<div class:list={["scales", { animate }]} style={`--size: ${size}px`} aria-hidden="true">
   {scales.map(({ x, y, color, delay }) => (
     <i style={`--x: ${x}px; --y: ${y}px; --c: ${color}; --delay: ${delay.toFixed(2)}s`} />
   ))}
@@ -66,17 +69,17 @@ for (let col = 0; col < cols; col++) {
 
   i {
     position: absolute;
-    inset-inline-start: calc(var(--x) - 52.5px);
-    inset-block-start: calc(var(--y) - 52.5px);
-    inline-size: 105px;
-    block-size: 105px;
+    inset-inline-start: calc(var(--x) - var(--size) / 2);
+    inset-block-start: calc(var(--y) - var(--size) / 2);
+    inline-size: var(--size);
+    block-size: var(--size);
     box-sizing: border-box;
-    border: 3px solid transparent;
+    border: calc(var(--size) * 3 / 105) solid transparent;
     border-radius: 50%;
     background:
       linear-gradient(#fff, #fff) padding-box,
       conic-gradient(from var(--from), rgb(var(--c)), rgb(var(--c) / 0)) border-box;
-    box-shadow: 0 0 15px rgb(0 0 255 / 10%);
+    box-shadow: 0 0 calc(var(--size) / 7) rgb(0 0 255 / 10%);
   }
 
   .animate i {

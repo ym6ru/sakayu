@@ -1,0 +1,90 @@
+---
+import { getEntry, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { formatDate } from "../../lib/posts";
+
+const post = await getEntry("blog", "2026-05-31");
+if (!post) throw new Error("post not found");
+const { Content } = await render(post);
+---
+
+<Base title="lab: s3">
+  <main>
+    <article>
+      <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
+      <h1>{post.data.title}</h1>
+      <div class="body">
+        <Content />
+      </div>
+    </article>
+  </main>
+  <span class="progress" aria-hidden="true"></span>
+</Base>
+
+<style>
+  @property --read {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 360deg;
+  }
+
+  main {
+    padding-block-start: var(--space-page);
+  }
+
+  time {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  h1 {
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+    margin-block-end: var(--space-7);
+  }
+
+  .body {
+    line-height: var(--leading-loose);
+
+    & :global(h2) {
+      font-size: var(--text-md);
+      margin-block: var(--space-7) var(--space-4);
+    }
+
+    & :global(p + p) {
+      margin-block-start: var(--space-4);
+    }
+  }
+
+  .progress {
+    position: fixed;
+    inset-block-end: var(--space-5);
+    inset-inline-end: var(--space-5);
+    inline-size: 3.5rem;
+    block-size: 3.5rem;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      conic-gradient(from 180deg, #0000ff, rgb(0 0 255 / 0%) var(--read), transparent 0) border-box;
+    box-shadow: 0 0 0.5rem rgb(0 0 255 / 10%);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .progress {
+      animation: read linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  @keyframes read {
+    from {
+      --read: 0deg;
+    }
+
+    to {
+      --read: 360deg;
+    }
+  }
+</style>
