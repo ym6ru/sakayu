@@ -19,6 +19,21 @@ const { title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        if (!("fonts" in document)) return;
+        const root = document.documentElement;
+        root.classList.add("fonts-loading");
+        const timeout = new Promise((resolve) => setTimeout(resolve, 2000));
+        const loaded = new Promise((resolve) => {
+          document.addEventListener("DOMContentLoaded", () => {
+            document.body.getBoundingClientRect();
+            document.fonts.ready.then(resolve);
+          });
+        });
+        Promise.race([loaded, timeout]).then(() => root.classList.remove("fonts-loading"));
+      })();
+    </script>
   </head>
   <body>
     <slot />
