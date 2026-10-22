@@ -2,16 +2,9 @@ node_modules/
 .pnp
 .pnp.*
 
-/.next/
+/dist/
 /out/
-/build/
-next-env.d.ts
-
-styled-system/
-
-/coverage/
-/test-results/
-/playwright-report/
+.astro/
 
 .env
 .env.*
@@ -34,4 +27,3 @@ CLAUDE.md
 docs/
 .maestri/
 
-*.tsbuildinfo
