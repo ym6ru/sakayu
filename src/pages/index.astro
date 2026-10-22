@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { Image } from "astro:assets";
+import display from "../assets/display.svg";
 import { formatDate, getPublishedPosts, toExcerpt } from "../lib/posts";
 
 const contacts = [
@@ -58,6 +59,7 @@ const posts = (await getPublishedPosts()).slice(0, 5);
         ))}
       </ul>
     </section>
+    <Image src={display} alt="" class="display" />
   </main>
 </Base>
 
@@ -87,7 +89,8 @@ const posts = (await getPublishedPosts()).slice(0, 5);
   }
 
   section,
-  hr {
+  hr,
+  .display {
     margin-block-start: var(--space-section);
     font-size: var(--text-lg);
   }
@@ -169,5 +172,9 @@ const posts = (await getPublishedPosts()).slice(0, 5);
     line-clamp: 2;
     overflow: hidden;
     font-size: var(--text-base);
+  }
+
+  .display {
+    inline-size: 100%;
   }
 </style>
