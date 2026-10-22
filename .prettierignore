@@ -1,6 +1,4 @@
 node_modules
-.next
-out
-build
-styled-system
+dist
+.astro
 pnpm-lock.yaml
