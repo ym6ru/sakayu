@@ -20,7 +20,7 @@ body {
   font-size: var(--text-base);
   font-weight: var(--weight-regular);
   line-height: var(--leading-normal);
-  letter-spacing: var(--tracking-normal);
+  letter-spacing: var(--tracking-body);
   font-feature-settings: "halt";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,8 +32,7 @@ h2,
 h3,
 h4 {
   font-weight: var(--weight-bold);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
+  letter-spacing: var(--tracking-title);
   font-feature-settings: "palt";
   text-wrap: balance;
 }
@@ -43,7 +42,7 @@ p {
 }
 
 a {
-  color: var(--color-link);
+  color: var(--color-primary);
   text-decoration-thickness: 0.05em;
   text-underline-offset: 0.3em;
 }
@@ -60,6 +59,6 @@ time {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-link);
+  outline: 2px solid var(--color-primary);
   outline-offset: 4px;
 }

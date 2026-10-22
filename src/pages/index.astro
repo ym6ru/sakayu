@@ -2,13 +2,17 @@
 import Base from "../layouts/Base.astro";
 
 const textSizes = [
-  ["--text-display", "表示 Display"],
-  ["--text-2xl", "ページ見出し"],
-  ["--text-xl", "記事タイトル・h2"],
-  ["--text-lg", "h3・リード文"],
-  ["--text-base", "本文 Body text"],
-  ["--text-sm", "補足・キャプション"],
-  ["--text-xs", "メタ情報 2026.10.22"],
+  ["--text-xl", "48px 見出し"],
+  ["--text-lg", "24px 記事タイトル"],
+  ["--text-md", "20px リード文"],
+  ["--text-base", "16px 本文 Body text"],
+  ["--text-sm", "14px 補足 2026.10.22"],
+];
+
+const weights = [
+  ["--weight-light", "300 Light 静かな文字組み"],
+  ["--weight-regular", "400 Regular 静かな文字組み"],
+  ["--weight-bold", "600 SemiBold 静かな文字組み"],
 ];
 
 const spaces = [
@@ -22,7 +26,13 @@ const spaces = [
   "--space-page",
 ];
 
-const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-link", "--color-line"];
+const colors = [
+  "--color-bg",
+  "--color-text",
+  "--color-text-muted",
+  "--color-primary",
+  "--color-line",
+];
 ---
 
 <Base title="Design tokens">
@@ -45,6 +55,18 @@ const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-lin
     </section>
 
     <section>
+      <h2>Weight</h2>
+      <ul class="scale">
+        {weights.map(([token, label]) => (
+          <li>
+            <code>{token}</code>
+            <span style={`font-weight: var(${token})`}>{label}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
       <h2>Article</h2>
       <article>
         <p class="muted">
@@ -57,8 +79,8 @@ const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-lin
           の混植でもリズムが崩れにくいのが特徴です。
         </p>
         <p>
-          行間は本文で 2、UI で 1.75。本文の幅は <a href="/blog">42rem</a> に抑え、一行がおよそ
-          33〜38 文字に収まるようにしています。
+          行間は 2 と 1.75 の二種類。本文の幅は <a href="/blog">42rem</a> に抑え、一行がおよそ 40
+          文字に収まるようにしています。
         </p>
       </article>
     </section>
@@ -97,7 +119,7 @@ const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-lin
   }
 
   header h1 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     margin-block-start: var(--space-3);
   }
 
@@ -120,7 +142,7 @@ const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-lin
   }
 
   code {
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     color: var(--color-text-muted);
   }
 
@@ -130,7 +152,6 @@ const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-lin
   }
 
   .scale span {
-    line-height: var(--leading-tight);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -146,7 +167,7 @@ const colors = ["--color-bg", "--color-text", "--color-text-muted", "--color-lin
   }
 
   article h3 {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     margin-block: var(--space-2) var(--space-5);
   }
 
