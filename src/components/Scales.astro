@@ -21,19 +21,33 @@ const pattern: (keyof typeof colors)[][] = [
   ["blue", "pale", "light", "blue"],
 ];
 
+const shines = [0, 20, 45, 70, 100, 100];
+const offsets = [-12, -6, 0, 6, 12];
+
+let seed = 3;
+const random = () => {
+  seed = (seed * 1664525 + 1013904223) % 4294967296;
+  return seed / 4294967296;
+};
+const pick = <T,>(values: T[]) => values[Math.floor(random() * values.length)];
+
 const columns = 52;
 const scales = Array.from({ length: columns }, (_, col) =>
   pattern[col % pattern.length].map((color, row) => ({
     x: col * 52.5,
     y: (col % 2 === 0 ? -105 : -52.5) + row * 98,
     color: colors[color],
+    shine: pick(shines),
+    offset: pick(offsets),
   })),
 ).flat();
 ---
 
 <div class="scales" aria-hidden="true">
-  {scales.map(({ x, y, color }) => (
-    <i style={`--x: ${x}px; --y: ${y}px; --c: ${color}`} />
+  {scales.map(({ x, y, color, shine, offset }) => (
+    <i
+      style={`--x: ${x}px; --y: ${y}px; --c: ${color}; --shine: ${shine}%; --offset: ${offset}%`}
+    />
   ))}
 </div>
 
@@ -55,6 +69,16 @@ const scales = Array.from({ length: columns }, (_, col) =>
     border: 3px solid transparent;
     border-radius: 50%;
     background:
+      linear-gradient(
+          135deg,
+          transparent calc(14% + var(--offset)),
+          rgb(255 255 255 / calc(var(--shine) * 0.45)) calc(32% + var(--offset)),
+          rgb(255 255 255 / var(--shine)) calc(40% + var(--offset)),
+          rgb(255 255 255 / calc(var(--shine) * 0.45)) calc(48% + var(--offset)),
+          transparent calc(66% + var(--offset))
+        )
+        padding-box,
+      radial-gradient(circle at 32% 38%, transparent 22%, rgb(var(--c) / 18%) 100%) padding-box,
       linear-gradient(#fff, #fff) padding-box,
       conic-gradient(from 180deg, rgb(var(--c)), rgb(var(--c) / 0%)) border-box;
     box-shadow: 0 7px 9px -3.5px rgb(0 0 128 / 18%);
