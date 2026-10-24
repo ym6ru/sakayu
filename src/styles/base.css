@@ -27,20 +27,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   padding-inline: var(--page-inset);
-  transition: opacity 0.3s ease-out;
 }
 
-html.fonts-loading body {
+html.fonts-loading .page {
   opacity: 0;
 }
 
+.page {
+  transition: opacity 0.3s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  body {
+  .page {
     transition: none;
   }
 }
 
-body > * {
+.page > * {
   max-inline-size: var(--measure);
 }
 

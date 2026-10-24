@@ -8,7 +8,7 @@ const contacts = [
   { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
 ];
 
-const posts = (await getPublishedPosts()).slice(0, 5);
+const posts = (await getPublishedPosts()).slice(0, 4);
 ---
 
 <Base title="sakayu.dev">
@@ -41,7 +41,7 @@ const posts = (await getPublishedPosts()).slice(0, 5);
     <section aria-labelledby="diary">
       <div class="section-heading">
         <h2 id="diary">日記</h2>
-        <a href="/blog">一覧</a>
+        <a href="/blog">過去の日記</a>
       </div>
       <div class="posts">
         <PostList posts={posts} />
@@ -75,10 +75,18 @@ const posts = (await getPublishedPosts()).slice(0, 5);
     letter-spacing: var(--tracking-body);
   }
 
-  section,
-  hr {
+  section {
     margin-block-start: var(--space-section);
     font-size: var(--text-lg);
+  }
+
+  hr {
+    max-inline-size: 22.5rem;
+    margin-block: 7.5rem;
+  }
+
+  hr + section {
+    margin-block-start: 0;
   }
 
   h2 {
@@ -92,15 +100,15 @@ const posts = (await getPublishedPosts()).slice(0, 5);
     margin-block-start: var(--space-5);
     padding: 0;
     list-style: none;
-    font-size: var(--text-md);
+    font-size: var(--text-base);
     font-weight: var(--weight-light);
     letter-spacing: var(--tracking-body);
   }
 
   .section-heading {
     display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
+    align-items: center;
+    gap: var(--space-4);
 
     & a {
       font-size: var(--text-base);
