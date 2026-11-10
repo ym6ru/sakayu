@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
 import Profile from "../components/Profile.astro";
+import SectionHeading from "../components/SectionHeading.astro";
 import { getPublishedPosts } from "../lib/posts";
 
 const posts = await getPublishedPosts();
@@ -10,7 +11,11 @@ const posts = await getPublishedPosts();
 <Base title="日記 | sakayu.dev">
   <main>
     <Profile />
-    <h1 class="visually-hidden">日記</h1>
+    <div class="heading">
+      <SectionHeading icon="pen-tool" level={1}>
+        Diary
+      </SectionHeading>
+    </div>
     <div class="posts">
       <PostList posts={posts} />
     </div>
@@ -25,8 +30,12 @@ const posts = await getPublishedPosts();
     padding-block-start: var(--space-page);
   }
 
-  .posts {
+  .heading {
     margin-block-start: var(--space-7);
+  }
+
+  .posts {
+    margin-block-start: var(--space-4);
   }
 
   nav {
