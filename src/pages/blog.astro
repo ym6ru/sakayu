@@ -19,9 +19,6 @@ const posts = await getPublishedPosts();
     <div class="posts">
       <PostList posts={posts} />
     </div>
-    <nav aria-label="サイト">
-      <a href="/">トップへ</a>
-    </nav>
   </main>
 </Base>
 
@@ -36,10 +33,5 @@ const posts = await getPublishedPosts();
 
   .posts {
     margin-block-start: var(--space-4);
-  }
-
-  nav {
-    margin-block-start: var(--space-section);
-    font-weight: var(--weight-light);
   }
 </style>
