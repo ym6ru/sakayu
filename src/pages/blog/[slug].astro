@@ -27,9 +27,6 @@ const { Content } = await render(post);
         <Content />
       </div>
     </article>
-    <nav aria-label="日記">
-      <a href="/blog">日記一覧へ</a>
-    </nav>
   </main>
 </Base>
 
@@ -117,10 +114,5 @@ const { Content } = await render(post);
     & :global(hr) {
       margin-block: var(--space-7);
     }
-  }
-
-  nav {
-    margin-block-start: var(--space-section);
-    font-weight: var(--weight-light);
   }
 </style>
