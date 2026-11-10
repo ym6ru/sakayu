@@ -31,9 +31,8 @@
   --space-section: clamp(5rem, 2.73rem + 9.09vw, 10rem);
   --space-page: clamp(8rem, 2.55rem + 21.82vw, 20rem);
 
-  --measure: 42rem;
+  --page-width: 55rem;
   --gutter: clamp(1.25rem, 0.68rem + 2.27vw, 2.5rem);
-  --page-inset: min(20rem, max(50vw - var(--measure) / 2, var(--gutter)));
 
   --color-bg: #fdfdfd;
   --color-text: #171717;
