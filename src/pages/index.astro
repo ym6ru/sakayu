@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
+import Profile from "../components/Profile.astro";
 import { getPublishedPosts } from "../lib/posts";
 import horo from "../assets/works/horo.jpg";
 import kamihako from "../assets/works/kamihako.jpg";
@@ -31,10 +32,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 
 <Base title="sakayu.dev">
   <main>
-    <div class="profile">
-      <img src="/favicon.svg" alt="" width="36" height="36" />
-      <h1 lang="en">Yuki Matsusaka</h1>
-    </div>
+    <Profile home />
     <div class="intro">
       <p>作ったもの、考えたことを記録しています。</p>
       <p>
@@ -108,22 +106,6 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 <style>
   main {
     padding-block-start: var(--space-page);
-  }
-
-  .profile {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-
-    & img {
-      border-radius: 8px;
-    }
-  }
-
-  h1 {
-    font-size: var(--text-base);
-    font-weight: var(--weight-regular);
-    letter-spacing: var(--tracking-wide);
   }
 
   .intro {

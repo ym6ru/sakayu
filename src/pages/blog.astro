@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
+import Profile from "../components/Profile.astro";
 import { getPublishedPosts } from "../lib/posts";
 
 const posts = await getPublishedPosts();
@@ -8,6 +9,7 @@ const posts = await getPublishedPosts();
 
 <Base title="日記 | sakayu.dev">
   <main>
+    <Profile />
     <h1>日記</h1>
     <div class="posts">
       <PostList posts={posts} />
@@ -24,6 +26,7 @@ const posts = await getPublishedPosts();
   }
 
   h1 {
+    margin-block-start: var(--space-7);
     font-size: var(--text-lg);
     font-weight: var(--weight-bold);
   }
