@@ -13,7 +13,9 @@ const contacts = [
   { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
 ];
 
-const works = [{ name: "放浪 / Horo", href: "https://horohororo.com/", image: horo }];
+const works = [
+  { name: "放浪 / Horo", description: "妻のブログ", href: "https://horohororo.com/", image: horo },
+];
 
 const posts = (await getPublishedPosts()).slice(0, 4);
 ---
@@ -52,11 +54,12 @@ const posts = (await getPublishedPosts()).slice(0, 4);
         Works
       </h2>
       <ul class="works">
-        {works.map(({ name, href, image }) => (
+        {works.map(({ name, description, href, image }) => (
           <li>
             <a href={href} target="_blank" rel="noopener noreferrer">
               <Image src={image} alt="" width={256} height={160} densities={[1, 2]} format="avif" />
               <span>{name}</span>
+              <small>{description}</small>
             </a>
           </li>
         ))}
@@ -167,6 +170,12 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 
     & a:hover span {
       text-decoration-line: underline;
+    }
+
+    & small {
+      margin-block-start: calc(-1 * var(--space-2));
+      color: var(--color-text-sub);
+      font-size: var(--text-sm);
     }
   }
 
