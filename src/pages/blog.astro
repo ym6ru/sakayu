@@ -10,7 +10,7 @@ const posts = await getPublishedPosts();
 <Base title="日記 | sakayu.dev">
   <main>
     <Profile />
-    <h1>日記</h1>
+    <h1 class="visually-hidden">日記</h1>
     <div class="posts">
       <PostList posts={posts} />
     </div>
@@ -23,12 +23,6 @@ const posts = await getPublishedPosts();
 <style>
   main {
     padding-block-start: var(--space-page);
-  }
-
-  h1 {
-    margin-block-start: var(--space-7);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-bold);
   }
 
   .posts {
