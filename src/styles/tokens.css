@@ -42,4 +42,5 @@
   --color-primary: #0000ff;
   --color-line: rgb(23 23 23 / 50%);
   --color-line-subtle: rgb(23 23 23 / 10%);
+  --color-border: rgb(100 100 100 / 20%);
 }
