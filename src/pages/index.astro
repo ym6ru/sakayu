@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
 import { getPublishedPosts } from "../lib/posts";
@@ -13,8 +14,9 @@ const contacts = [
   { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
 ];
 
-const works = [
+const works: { name: string; description: string; href?: string; image?: ImageMetadata }[] = [
   { name: "放浪 / Horo", description: "妻のブログ", href: "https://horohororo.com/", image: horo },
+  { name: "3D 紙箱シミュレータ", description: "開発中" },
 ];
 
 const posts = (await getPublishedPosts()).slice(0, 4);
@@ -54,15 +56,32 @@ const posts = (await getPublishedPosts()).slice(0, 4);
         Works
       </h2>
       <ul class="works">
-        {works.map(({ name, description, href, image }) => (
-          <li>
-            <a href={href} target="_blank" rel="noopener noreferrer">
-              <Image src={image} alt="" width={256} height={160} densities={[1, 2]} format="avif" />
-              <span>{name}</span>
-              <small>{description}</small>
-            </a>
-          </li>
-        ))}
+        {works.map(({ name, description, href, image }) => {
+          const Tag = href ? "a" : "div";
+          return (
+            <li>
+              <Tag
+                class="work"
+                {...(href && { href, target: "_blank", rel: "noopener noreferrer" })}
+              >
+                {image ? (
+                  <Image
+                    src={image}
+                    alt=""
+                    width={256}
+                    height={160}
+                    densities={[1, 2]}
+                    format="avif"
+                  />
+                ) : (
+                  <div class="placeholder" />
+                )}
+                <span>{name}</span>
+                <small>{description}</small>
+              </Tag>
+            </li>
+          );
+        })}
       </ul>
     </section>
     <section aria-labelledby="diary">
@@ -145,17 +164,26 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     grid-template-columns: repeat(auto-fill, 16rem);
     gap: var(--space-5) var(--space-4);
 
-    & a {
+    & .work {
       display: grid;
       gap: var(--space-3);
+      font-weight: var(--weight-regular);
+    }
+
+    & img,
+    & .placeholder {
+      inline-size: 16rem;
+      block-size: 10rem;
+      border: 1px solid var(--color-line-subtle);
+      border-radius: 8px;
     }
 
     & img {
-      inline-size: 16rem;
-      block-size: 10rem;
       object-fit: cover;
-      border: 1px solid var(--color-line-subtle);
-      border-radius: 8px;
+    }
+
+    & .placeholder {
+      background-color: var(--color-hover);
     }
 
     & a:hover {
