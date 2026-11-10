@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
@@ -6,7 +7,7 @@ export default defineConfig({
   trailingSlash: "never",
   build: { format: "file" },
   outDir: "./out",
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
   image: {
     service: { entrypoint: "astro/assets/services/sharp", config: { webp: { lossless: true } } },
   },

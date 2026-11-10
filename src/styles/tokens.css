@@ -5,7 +5,6 @@
   --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
-  --weight-bold: 600;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -45,7 +44,7 @@
   --color-line: rgb(25 25 25 / 50%);
   --color-line-subtle: rgb(25 25 25 / 10%);
   --color-border: rgb(100 100 100 / 20%);
-  --color-underline: rgb(100 100 100 / 10%);
+  --color-underline: rgb(100 100 100 / 20%);
   --color-hover: rgb(100 100 100 / 10%);
 }
 
@@ -58,7 +57,7 @@
   --color-line: rgb(253 253 253 / 50%);
   --color-line-subtle: rgb(253 253 253 / 10%);
   --color-border: rgb(155 155 155 / 20%);
-  --color-underline: rgb(155 155 155 / 10%);
+  --color-underline: rgb(155 155 155 / 20%);
   --color-hover: rgb(155 155 155 / 15%);
   --color-primary: #8c8cff;
 }
