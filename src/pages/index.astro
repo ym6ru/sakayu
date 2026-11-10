@@ -5,6 +5,7 @@ import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
 import { getPublishedPosts } from "../lib/posts";
 import horo from "../assets/works/horo.jpg";
+import kamihako from "../assets/works/kamihako.jpg";
 import BriefcaseBusiness from "../icons/briefcase-business.svg";
 import Mail from "../icons/mail.svg";
 import PenTool from "../icons/pen-tool.svg";
@@ -14,8 +15,14 @@ const contacts = [
   { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
 ];
 
-const works: { name: string; description: string; href?: string; image?: ImageMetadata }[] = [
-  { name: "3D 紙箱シミュレータ", description: "開発中" },
+const works: {
+  name: string;
+  description: string;
+  image: ImageMetadata;
+  href?: string;
+  badge?: string;
+}[] = [
+  { name: "3D 紙箱シミュレータ", description: "開発中", image: kamihako, badge: "開発中" },
   { name: "放浪 / Horo", description: "妻のブログ", href: "https://horohororo.com/", image: horo },
 ];
 
@@ -56,7 +63,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
         Works
       </h2>
       <ul class="works">
-        {works.map(({ name, description, href, image }) => {
+        {works.map(({ name, description, image, href, badge }) => {
           const Tag = href ? "a" : "div";
           return (
             <li>
@@ -64,7 +71,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
                 class="work"
                 {...(href && { href, target: "_blank", rel: "noopener noreferrer" })}
               >
-                {image ? (
+                <div class="thumb">
                   <Image
                     src={image}
                     alt=""
@@ -73,11 +80,8 @@ const posts = (await getPublishedPosts()).slice(0, 4);
                     densities={[1, 2]}
                     format="avif"
                   />
-                ) : (
-                  <div class="placeholder">
-                    <span class="badge">開発中</span>
-                  </div>
-                )}
+                  {badge && <span class="badge">{badge}</span>}
+                </div>
                 <span>{name}</span>
                 <small>{description}</small>
               </Tag>
@@ -172,21 +176,16 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       font-weight: var(--weight-regular);
     }
 
-    & img,
-    & .placeholder {
-      inline-size: 16rem;
-      block-size: 10rem;
-      border: 1px solid var(--color-line-subtle);
-      border-radius: 8px;
+    & .thumb {
+      position: relative;
     }
 
     & img {
+      inline-size: 16rem;
+      block-size: 10rem;
       object-fit: cover;
-    }
-
-    & .placeholder {
-      position: relative;
-      background-color: var(--color-hover);
+      border: 1px solid var(--color-line-subtle);
+      border-radius: 8px;
     }
 
     & .badge {
