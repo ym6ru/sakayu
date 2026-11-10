@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --font-sans: "Gen Interface JP", system-ui, sans-serif;
 
   --weight-light: 300;
@@ -43,4 +44,16 @@
   --color-line: rgb(23 23 23 / 50%);
   --color-line-subtle: rgb(23 23 23 / 10%);
   --color-border: rgb(100 100 100 / 20%);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #171717;
+  --color-text: #fdfdfd;
+  --color-text-sub: #9b9b9b;
+  --color-text-muted: rgb(253 253 253 / 50%);
+  --color-line: rgb(253 253 253 / 50%);
+  --color-line-subtle: rgb(253 253 253 / 10%);
+  --color-border: rgb(155 155 155 / 20%);
+  --color-primary: #8c8cff;
 }
