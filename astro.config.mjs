@@ -9,6 +9,7 @@ export default defineConfig({
   outDir: "./out",
   integrations: [mdx(), sitemap()],
   image: {
+    remotePatterns: [{ protocol: "https" }],
     service: { entrypoint: "astro/assets/services/sharp", config: { webp: { lossless: true } } },
   },
 });
