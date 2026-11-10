@@ -61,6 +61,7 @@ p {
 
 a {
   color: inherit;
+  font-weight: var(--weight-regular);
   text-decoration-line: none;
   text-decoration-color: var(--color-underline);
   text-decoration-thickness: var(--underline-thickness);
