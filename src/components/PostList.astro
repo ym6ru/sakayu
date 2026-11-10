@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { formatDate, toExcerpt } from "../lib/posts";
+import { formatDate } from "../lib/posts";
 
 interface Props {
   posts: CollectionEntry<"blog">[];
@@ -14,12 +14,9 @@ const { posts } = Astro.props;
   {posts.map((post) => (
     <li>
       <a href={`/blog/${post.id}`}>
-        <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
-        <div>
-          <span class="title">{post.data.title}</span>
-          <p>{toExcerpt(post.body)}</p>
-          <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
-        </div>
+        <Image src={post.data.icon} alt="" width={22} height={22} densities={[1, 2, 3]} />
+        <span class="title">{post.data.title}</span>
+        <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
       </a>
     </li>
   ))}
@@ -28,7 +25,7 @@ const { posts } = Astro.props;
 <style>
   ul {
     display: grid;
-    gap: var(--space-6);
+    gap: var(--space-3);
     padding: 0;
     list-style: none;
     font-weight: var(--weight-light);
@@ -37,47 +34,35 @@ const { posts } = Astro.props;
 
   a {
     display: grid;
-    grid-template-columns: 4rem 1fr;
-    align-items: start;
-    gap: var(--space-4);
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: var(--space-2);
     color: inherit;
-    text-decoration-line: none;
 
-    &:hover .title {
+    &:hover {
       text-decoration-line: none;
     }
-  }
 
-  .title {
-    color: var(--color-primary);
-    font-size: var(--text-base);
-    line-height: var(--leading-normal);
-    text-decoration-line: underline;
-    text-decoration-thickness: var(--underline-thickness);
-    text-underline-offset: var(--underline-offset);
+    &:hover .title {
+      text-decoration-line: underline;
+    }
   }
 
   img {
     box-sizing: content-box;
-    padding: var(--space-2);
+    padding: 5px;
   }
 
-  div {
-    display: grid;
-    gap: var(--space-2);
+  .title {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    text-decoration-color: var(--color-underline);
+    text-decoration-thickness: var(--underline-thickness);
+    text-underline-offset: var(--underline-offset);
   }
 
   time {
-    font-size: var(--text-sm);
-  }
-
-  p {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    overflow: hidden;
-    font-size: var(--text-sm);
-    line-height: var(--leading-loose);
+    color: var(--color-text-sub);
+    font-size: 0.8125rem;
   }
 </style>

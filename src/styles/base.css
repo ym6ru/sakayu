@@ -26,7 +26,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  padding-inline: var(--page-inset);
+  padding-inline: var(--gutter);
 }
 
 html.fonts-loading .page {
@@ -34,6 +34,8 @@ html.fonts-loading .page {
 }
 
 .page {
+  max-inline-size: var(--page-width);
+  margin-inline: auto;
   transition: opacity 0.3s ease-out;
 }
 
@@ -41,10 +43,6 @@ html.fonts-loading .page {
   .page {
     transition: none;
   }
-}
-
-.page > * {
-  max-inline-size: var(--measure);
 }
 
 h1,
@@ -62,12 +60,15 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: inherit;
+  font-weight: var(--weight-regular);
+  text-decoration-line: none;
+  text-decoration-color: var(--color-underline);
   text-decoration-thickness: var(--underline-thickness);
   text-underline-offset: var(--underline-offset);
 
   &:hover {
-    text-decoration-line: none;
+    text-decoration-line: underline;
   }
 }
 
@@ -85,9 +86,19 @@ hr {
 
 time {
   font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-title);
 }
 
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import Profile from "../../components/Profile.astro";
 import { formatDate, getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
@@ -15,9 +16,10 @@ const { Content } = await render(post);
 
 <Base title={`${post.data.title} | sakayu.dev`}>
   <main>
+    <Profile />
     <article>
       <header>
-        <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
+        <Image src={post.data.icon} alt="" width={22} height={22} densities={[1, 2, 3]} />
         <h1>{post.data.title}</h1>
         <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
       </header>
@@ -25,9 +27,6 @@ const { Content } = await render(post);
         <Content />
       </div>
     </article>
-    <nav aria-label="日記">
-      <a href="/blog">日記一覧へ</a>
-    </nav>
   </main>
 </Base>
 
@@ -36,20 +35,28 @@ const { Content } = await render(post);
     padding-block-start: var(--space-page);
   }
 
+  article {
+    margin-block-start: var(--space-7);
+  }
+
   header {
     display: grid;
-    gap: var(--space-2);
+    grid-template-columns: 2rem 1fr;
+    align-items: center;
+    gap: var(--space-4) var(--space-2);
   }
 
   header img {
     box-sizing: content-box;
-    padding: var(--space-2);
-    margin-inline-start: calc(-1 * var(--space-2));
+    padding: 5px;
+  }
+
+  time {
+    grid-column: 1 / -1;
   }
 
   h1 {
-    margin-block-start: var(--space-4);
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     font-weight: var(--weight-regular);
     line-height: var(--leading-normal);
   }
@@ -71,7 +78,7 @@ const { Content } = await render(post);
 
     & :global(h2) {
       margin-block: var(--space-7) var(--space-3);
-      font-size: var(--text-md);
+      font-size: var(--text-base);
     }
 
     & :global(h3) {
@@ -111,10 +118,5 @@ const { Content } = await render(post);
     & :global(hr) {
       margin-block: var(--space-7);
     }
-  }
-
-  nav {
-    margin-block-start: var(--space-section);
-    font-weight: var(--weight-light);
   }
 </style>
