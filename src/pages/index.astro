@@ -14,7 +14,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 <Base title="sakayu.dev">
   <main>
     <div class="profile">
-      <img src="/favicon.svg" alt="" width="64" height="64" />
+      <img src="/favicon.svg" alt="" width="36" height="36" />
       <h1 lang="en">Yuki Matsusaka</h1>
     </div>
     <div class="intro">
@@ -58,11 +58,15 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     display: flex;
     align-items: center;
     gap: var(--space-4);
+
+    & img {
+      border-radius: 8px;
+    }
   }
 
   h1 {
-    font-size: var(--text-lg);
-    font-weight: var(--weight-light);
+    font-size: var(--text-base);
+    font-weight: var(--weight-regular);
     letter-spacing: var(--tracking-wide);
   }
 
