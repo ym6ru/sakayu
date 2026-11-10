@@ -41,4 +41,5 @@
   --color-text-muted: rgb(23 23 23 / 50%);
   --color-primary: #0000ff;
   --color-line: rgb(23 23 23 / 50%);
+  --color-line-subtle: rgb(23 23 23 / 10%);
 }

@@ -1,12 +1,16 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
 import { getPublishedPosts } from "../lib/posts";
+import horo from "../assets/works/horo.jpg";
 
 const contacts = [
   { label: "X", id: "@XpKM4agvDSOfoGp", href: "https://x.com/XpKM4agvDSOfoGp" },
   { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
 ];
+
+const works = [{ name: "放浪 / Horo", href: "https://horohororo.com/", image: horo }];
 
 const posts = (await getPublishedPosts()).slice(0, 4);
 ---
@@ -33,6 +37,21 @@ const posts = (await getPublishedPosts()).slice(0, 4);
             {label}：
             <a href={href} target="_blank" rel="me noopener noreferrer">
               {id}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+    <section aria-labelledby="works">
+      <h2 id="works" lang="en">
+        Works
+      </h2>
+      <ul class="works">
+        {works.map(({ name, href, image }) => (
+          <li>
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              <Image src={image} alt="" width={420} densities={[1, 2]} format="avif" />
+              <span>{name}</span>
             </a>
           </li>
         ))}
@@ -112,6 +131,33 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     font-size: var(--text-base);
     font-weight: var(--weight-light);
     letter-spacing: var(--tracking-body);
+  }
+
+  .works {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-4);
+
+    & a {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    & img {
+      inline-size: 100%;
+      block-size: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border: 1px solid var(--color-line-subtle);
+      border-radius: 8px;
+    }
+
+    & a:hover span {
+      text-decoration-line: none;
+    }
+
+    & span {
+      text-decoration-line: underline;
+    }
   }
 
   .section-heading {
