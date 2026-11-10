@@ -13,10 +13,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 
 <Base title="sakayu.dev">
   <main>
-    <hgroup>
-      <h1>まつさかゆうき</h1>
-      <p lang="en">Yuki Matsusaka</p>
-    </hgroup>
+    <div class="profile">
+      <img src="/favicon.svg" alt="" width="64" height="64" />
+      <h1 lang="en">Yuki Matsusaka</h1>
+    </div>
     <div class="intro">
       <p>作ったもの、考えたことを記録しています。</p>
       <p>
@@ -55,13 +55,13 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     padding-block-start: var(--space-page);
   }
 
-  h1 {
-    font-size: var(--text-xl);
-    font-weight: var(--weight-regular);
-    letter-spacing: var(--tracking-wide);
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
   }
 
-  hgroup p {
+  h1 {
     font-size: var(--text-lg);
     font-weight: var(--weight-light);
     letter-spacing: var(--tracking-wide);
