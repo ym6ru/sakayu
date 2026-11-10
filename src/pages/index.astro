@@ -24,7 +24,9 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       </p>
     </div>
     <section aria-labelledby="contact">
-      <h2 id="contact">連絡先</h2>
+      <h2 id="contact" lang="en">
+        Contact
+      </h2>
       <ul>
         {contacts.map(({ label, id, href }) => (
           <li>
@@ -39,7 +41,9 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     <hr />
     <section aria-labelledby="diary">
       <div class="section-heading">
-        <h2 id="diary">日記</h2>
+        <h2 id="diary" lang="en">
+          Diary
+        </h2>
         <a href="/blog">過去の日記</a>
       </div>
       <div class="posts">
@@ -94,8 +98,9 @@ const posts = (await getPublishedPosts()).slice(0, 4);
   }
 
   h2 {
-    font-size: inherit;
-    font-weight: var(--weight-bold);
+    color: var(--color-text-sub);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
   }
 
   ul {
