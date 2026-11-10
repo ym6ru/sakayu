@@ -49,7 +49,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-title);
   font-feature-settings: "palt";
   text-wrap: balance;
@@ -61,7 +61,6 @@ p {
 
 a {
   color: inherit;
-  font-weight: var(--weight-regular);
   text-decoration-line: none;
   text-decoration-color: var(--color-underline);
   text-decoration-thickness: var(--underline-thickness);
