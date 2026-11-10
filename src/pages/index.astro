@@ -20,9 +20,8 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     <div class="intro">
       <p>作ったもの、考えたことを記録しています。</p>
       <p>
-        ソフトウェアエンジニア。ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。
+        ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。おさかなと植物が好きです。
       </p>
-      <p>おさかなと植物が好きです。</p>
     </div>
     <section aria-labelledby="contact">
       <h2 id="contact">連絡先</h2>
@@ -69,7 +68,8 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 
   .intro {
     margin-block-start: var(--space-7);
-    font-size: var(--text-lg);
+    color: var(--color-text-sub);
+    font-size: var(--text-base);
     font-weight: var(--weight-light);
     line-height: var(--leading-loose);
     letter-spacing: var(--tracking-body);
