@@ -163,6 +163,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     }
 
     & span {
+      font-size: var(--text-sm);
       text-decoration-color: var(--color-underline);
       text-decoration-thickness: var(--underline-thickness);
       text-underline-offset: var(--underline-offset);
@@ -175,7 +176,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     & small {
       margin-block-start: calc(-1 * var(--space-2));
       color: var(--color-text-sub);
-      font-size: var(--text-sm);
+      font-size: var(--text-xs);
     }
   }
 
