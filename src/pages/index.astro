@@ -63,16 +63,16 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       </ul>
     </section>
     <section aria-labelledby="diary">
-      <div class="section-heading">
-        <h2 id="diary" lang="en">
-          <PenTool width={16} height={16} aria-hidden="true" />
-          Diary
-        </h2>
-        <a href="/blog">過去の日記</a>
-      </div>
+      <h2 id="diary" lang="en">
+        <PenTool width={16} height={16} aria-hidden="true" />
+        Diary
+      </h2>
       <div class="posts">
         <PostList posts={posts} />
       </div>
+      <a class="all" href="/blog">
+        すべての日記を見る
+      </a>
     </section>
   </main>
 </Base>
@@ -171,19 +171,15 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     }
   }
 
-  .section-heading {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-
-    & a {
-      font-size: var(--text-base);
-      font-weight: var(--weight-light);
-      letter-spacing: var(--tracking-body);
-    }
-  }
-
   .posts {
     margin-block-start: var(--space-4);
+  }
+
+  .all {
+    display: inline-block;
+    margin-block-start: var(--space-5);
+    font-size: var(--text-base);
+    font-weight: var(--weight-light);
+    letter-spacing: var(--tracking-body);
   }
 </style>
