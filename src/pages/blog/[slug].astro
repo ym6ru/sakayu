@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Profile from "../../components/Profile.astro";
-import ChevronLeft from "../../icons/chevron-left.svg";
 import { formatDate, getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
@@ -19,10 +18,6 @@ const { Content } = await render(post);
   <main>
     <Profile />
     <article>
-      <a class="back" href="/blog">
-        <ChevronLeft width={16} height={16} aria-hidden="true" />
-        <span>ブログ</span>
-      </a>
       <header>
         <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
         <h1>{post.data.title}</h1>
@@ -41,45 +36,7 @@ const { Content } = await render(post);
   }
 
   article {
-    position: relative;
     margin-block-start: var(--space-7);
-  }
-
-  .back {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    inline-size: fit-content;
-    margin-block-end: var(--space-4);
-    color: var(--color-text-sub);
-    font-size: var(--text-sm);
-    white-space: nowrap;
-
-    & svg {
-      flex-shrink: 0;
-    }
-
-    &:hover {
-      text-decoration-line: none;
-    }
-
-    & span {
-      text-decoration-color: var(--color-underline);
-      text-decoration-thickness: var(--underline-thickness);
-      text-underline-offset: var(--underline-offset);
-    }
-
-    &:hover span {
-      text-decoration-line: underline;
-    }
-
-    @media (width >= 72rem) {
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline-end: calc(100% + var(--space-6));
-      block-size: 4rem;
-      margin-block-end: 0;
-    }
   }
 
   header {
