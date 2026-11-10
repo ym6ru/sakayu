@@ -19,7 +19,7 @@ const { Content } = await render(post);
     <Profile />
     <article>
       <header>
-        <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
+        <Image src={post.data.icon} alt="" width={22} height={22} densities={[1, 2, 3]} />
         <h1>{post.data.title}</h1>
         <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
       </header>
@@ -41,17 +41,21 @@ const { Content } = await render(post);
 
   header {
     display: grid;
-    gap: var(--space-2);
+    grid-template-columns: 2rem 1fr;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
   }
 
   header img {
     box-sizing: content-box;
-    padding: var(--space-2);
-    margin-inline-start: calc(-1 * var(--space-2));
+    padding: 5px;
+  }
+
+  time {
+    grid-column: 2;
   }
 
   h1 {
-    margin-block-start: var(--space-4);
     font-size: var(--text-base);
     font-weight: var(--weight-regular);
     line-height: var(--leading-normal);
@@ -74,7 +78,7 @@ const { Content } = await render(post);
 
     & :global(h2) {
       margin-block: var(--space-7) var(--space-3);
-      font-size: var(--text-md);
+      font-size: var(--text-base);
     }
 
     & :global(h3) {
