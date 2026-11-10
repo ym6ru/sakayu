@@ -60,12 +60,13 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: inherit;
+  text-decoration-line: none;
   text-decoration-thickness: var(--underline-thickness);
   text-underline-offset: var(--underline-offset);
 
   &:hover {
-    text-decoration-line: none;
+    text-decoration-line: underline;
   }
 }
 

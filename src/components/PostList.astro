@@ -41,18 +41,19 @@ const { posts } = Astro.props;
     align-items: start;
     gap: var(--space-4);
     color: inherit;
-    text-decoration-line: none;
+
+    &:hover {
+      text-decoration-line: none;
+    }
 
     &:hover .title {
-      text-decoration-line: none;
+      text-decoration-line: underline;
     }
   }
 
   .title {
-    color: var(--color-primary);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
-    text-decoration-line: underline;
     text-decoration-thickness: var(--underline-thickness);
     text-underline-offset: var(--underline-offset);
   }
