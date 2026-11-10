@@ -86,6 +86,7 @@ hr {
 
 time {
   font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-title);
 }
 
 :focus-visible {
