@@ -62,6 +62,7 @@ p {
 a {
   color: inherit;
   text-decoration-line: none;
+  text-decoration-color: var(--color-underline);
   text-decoration-thickness: var(--underline-thickness);
   text-underline-offset: var(--underline-offset);
 

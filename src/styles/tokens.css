@@ -20,7 +20,7 @@
   --tracking-body: 0.06em;
   --tracking-wide: 0.1em;
 
-  --underline-thickness: 0.08em;
+  --underline-thickness: 1px;
   --underline-offset: 0.4em;
 
   --space-1: 0.25rem;
@@ -44,6 +44,7 @@
   --color-line: rgb(23 23 23 / 50%);
   --color-line-subtle: rgb(23 23 23 / 10%);
   --color-border: rgb(100 100 100 / 20%);
+  --color-underline: rgb(100 100 100 / 10%);
 }
 
 :root[data-theme="dark"] {
@@ -55,5 +56,6 @@
   --color-line: rgb(253 253 253 / 50%);
   --color-line-subtle: rgb(253 253 253 / 10%);
   --color-border: rgb(155 155 155 / 20%);
+  --color-underline: rgb(155 155 155 / 10%);
   --color-primary: #8c8cff;
 }

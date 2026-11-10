@@ -160,6 +160,12 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       text-decoration-line: none;
     }
 
+    & span {
+      text-decoration-color: var(--color-underline);
+      text-decoration-thickness: var(--underline-thickness);
+      text-underline-offset: var(--underline-offset);
+    }
+
     & a:hover span {
       text-decoration-line: underline;
     }
