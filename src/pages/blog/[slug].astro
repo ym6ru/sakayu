@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import Profile from "../../components/Profile.astro";
 import { formatDate, getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
@@ -15,6 +16,7 @@ const { Content } = await render(post);
 
 <Base title={`${post.data.title} | sakayu.dev`}>
   <main>
+    <Profile />
     <article>
       <header>
         <Image src={post.data.icon} alt="" width={48} height={48} densities={[1, 2, 3]} />
@@ -34,6 +36,10 @@ const { Content } = await render(post);
 <style>
   main {
     padding-block-start: var(--space-page);
+  }
+
+  article {
+    margin-block-start: var(--space-7);
   }
 
   header {

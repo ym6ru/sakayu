@@ -38,12 +38,12 @@
   --gutter: clamp(1.25rem, 0.68rem + 2.27vw, 2.5rem);
 
   --color-bg: #fdfdfd;
-  --color-text: #171717;
+  --color-text: #191919;
   --color-text-sub: #646464;
-  --color-text-muted: rgb(23 23 23 / 50%);
+  --color-text-muted: rgb(25 25 25 / 50%);
   --color-primary: #0000ff;
-  --color-line: rgb(23 23 23 / 50%);
-  --color-line-subtle: rgb(23 23 23 / 10%);
+  --color-line: rgb(25 25 25 / 50%);
+  --color-line-subtle: rgb(25 25 25 / 10%);
   --color-border: rgb(100 100 100 / 20%);
   --color-underline: rgb(100 100 100 / 10%);
   --color-hover: rgb(100 100 100 / 10%);
