@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getOgp } from "../lib/ogp";
 
 interface Props {
@@ -16,7 +17,7 @@ const host = new URL(url).host;
     {description && <span class="description">{description}</span>}
     <span class="host">{host}</span>
   </span>
-  {image && <img src={image} alt="" width="240" height="126" loading="lazy" decoding="async" />}
+  {image && <Image src={image} alt="" inferSize width={480} format="avif" />}
 </a>
 
 <style>
