@@ -15,7 +15,11 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Base title={`${post.data.title} | sakayu.dev`}>
+<Base
+  title={`${post.data.title} | sakayu.dev`}
+  description={post.data.description}
+  publishedAt={post.data.publishedAt}
+>
   <main>
     <Profile />
     <article>
