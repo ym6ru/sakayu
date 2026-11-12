@@ -177,6 +177,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       text-decoration-color: var(--color-underline);
       text-decoration-thickness: var(--underline-thickness);
       text-underline-offset: var(--underline-offset);
+
+      @media (width < 40rem) {
+        font-size: var(--text-base);
+      }
     }
 
     & a:hover span {
@@ -187,6 +191,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       margin-block-start: calc(-1 * var(--space-2));
       color: var(--color-text-sub);
       font-size: var(--text-xs);
+
+      @media (width < 40rem) {
+        font-size: var(--text-sm);
+      }
     }
   }
 
