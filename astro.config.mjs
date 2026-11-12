@@ -6,7 +6,6 @@ export default defineConfig({
   site: "https://sakayu.dev",
   trailingSlash: "never",
   build: { format: "file" },
-  outDir: "./out",
   integrations: [mdx(), sitemap()],
   image: {
     remotePatterns: [{ protocol: "https" }],
