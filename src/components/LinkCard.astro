@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, inferRemoteSize } from "astro:assets";
 import { getOgp } from "../lib/ogp";
 
 interface Props {
@@ -9,6 +9,16 @@ interface Props {
 const { url } = Astro.props;
 const { title, description, image } = await getOgp(url);
 const host = new URL(url).host;
+
+const imageWidth = 480;
+const imageSize = image
+  ? await inferRemoteSize(image)
+      .then(({ width, height }) => ({
+        width: imageWidth,
+        height: Math.round((imageWidth * height) / width),
+      }))
+      .catch(() => undefined)
+  : undefined;
 ---
 
 <a class="card" href={url} target="_blank" rel="noopener noreferrer">
@@ -17,7 +27,7 @@ const host = new URL(url).host;
     {description && <span class="description">{description}</span>}
     <span class="host">{host}</span>
   </span>
-  {image && <Image src={image} alt="" inferSize width={480} format="avif" />}
+  {image && imageSize && <Image src={image} alt="" {...imageSize} format="avif" />}
 </a>
 
 <style>
@@ -26,6 +36,10 @@ const host = new URL(url).host;
     overflow: hidden;
     border: 1px solid var(--color-border);
     border-radius: 8px;
+
+    @media (width < 40rem) {
+      flex-direction: column-reverse;
+    }
 
     &:hover {
       text-decoration-line: none;
@@ -62,16 +76,15 @@ const host = new URL(url).host;
 
   img {
     flex-shrink: 0;
+    align-self: center;
     inline-size: 15rem;
     block-size: auto;
-    aspect-ratio: 1200 / 630;
-    object-fit: cover;
     border-inline-start: 1px solid var(--color-border);
 
     @media (width < 40rem) {
-      align-self: stretch;
-      inline-size: 6rem;
-      aspect-ratio: auto;
+      inline-size: 100%;
+      border-inline-start: 0;
+      border-block-end: 1px solid var(--color-border);
     }
   }
 </style>
