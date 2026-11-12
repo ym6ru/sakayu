@@ -36,7 +36,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
   </div>
   <section aria-labelledby="contact">
     <SectionHeading id="contact" icon="mail">
-      れんらく
+      Contact
     </SectionHeading>
     <ul>
       {contacts.map(({ label, id, href }) => (
@@ -51,7 +51,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
   </section>
   <section aria-labelledby="works">
     <SectionHeading id="works" icon="briefcase-business">
-      つくった
+      Works
     </SectionHeading>
     <ul class="works">
       {works.map(({ name, description, image, href, badge }) => {
@@ -81,7 +81,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
   </section>
   <section aria-labelledby="diary">
     <SectionHeading id="diary" icon="pen-tool">
-      かいた
+      Diary
     </SectionHeading>
     <div class="posts">
       <PostList posts={posts} />
