@@ -65,7 +65,8 @@ const posts = (await getPublishedPosts()).slice(0, 4);
                   alt=""
                   width={256}
                   height={160}
-                  densities={[1, 2]}
+                  widths={[256, 512, 768, 1024]}
+                  sizes="(width < 40rem) 100vw, 256px"
                   format="avif"
                 />
                 {badge && <span class="badge">{badge}</span>}
@@ -125,6 +126,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     grid-template-columns: repeat(auto-fill, 16rem);
     gap: var(--space-5) var(--space-4);
 
+    @media (width < 40rem) {
+      grid-template-columns: 1fr;
+    }
+
     & .work {
       display: grid;
       gap: var(--space-3);
@@ -138,6 +143,13 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       inline-size: 16rem;
       block-size: 10rem;
       object-fit: cover;
+
+      @media (width < 40rem) {
+        inline-size: 100%;
+        block-size: auto;
+        aspect-ratio: 16 / 10;
+      }
+
       border: 1px solid var(--color-line-subtle);
       border-radius: 8px;
     }
