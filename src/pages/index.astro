@@ -54,7 +54,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       Works
     </SectionHeading>
     <ul class="works">
-      {works.map(({ name, description, image, href, badge }) => {
+      {works.map(({ name, description, image, href, badge }, index) => {
         const Tag = href ? "a" : "div";
         return (
           <li>
@@ -68,6 +68,7 @@ const posts = (await getPublishedPosts()).slice(0, 4);
                   widths={[256, 512, 768, 1024]}
                   sizes="(width < 40rem) 100vw, 256px"
                   format="avif"
+                  {...(index === 0 && { loading: "eager", fetchpriority: "high" })}
                 />
                 {badge && <span class="badge">{badge}</span>}
               </div>
