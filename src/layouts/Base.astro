@@ -10,7 +10,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 import { site } from "../lib/site";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   publishedAt?: string;
   noindex?: boolean;
@@ -24,6 +24,7 @@ const {
   noindex = false,
   home = false,
 } = Astro.props;
+const fullTitle = title ? `${title} | ${site.name}` : site.name;
 const url = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ""), Astro.site);
 const image = new URL("/og.png", Astro.site);
 ---
@@ -32,12 +33,12 @@ const image = new URL("/og.png", Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={url} />}
     <meta property="og:type" content={publishedAt ? "article" : "website"} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={url} />
     <meta property="og:image" content={image} />
