@@ -1,0 +1,53 @@
+---
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+---
+
+{home ? (
+  <div class="profile">
+    <img src="/favicon.svg" alt="" width="36" height="36" />
+    <h1 class="name" lang="en">
+      Yuki Matsusaka
+    </h1>
+  </div>
+) : (
+  <a class="profile" href="/">
+    <img src="/favicon.svg" alt="" width="36" height="36" />
+    <span class="name" lang="en">
+      Yuki Matsusaka
+    </span>
+  </a>
+)}
+
+<style>
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    inline-size: fit-content;
+
+    & img {
+      border-radius: 8px;
+    }
+  }
+
+  a.profile:hover {
+    text-decoration-line: none;
+
+    & .name {
+      text-decoration-line: underline;
+    }
+  }
+
+  .name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-wide);
+    text-decoration-color: var(--color-underline);
+    text-decoration-thickness: var(--underline-thickness);
+    text-underline-offset: var(--underline-offset);
+  }
+</style>

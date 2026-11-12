@@ -1,18 +1,19 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
+import astro from "eslint-plugin-astro";
+import { defineConfig, globalIgnores } from "eslint/config";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  eslintConfigPrettier,
+export default defineConfig([
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...astro.configs.recommended,
+  ...astro.configs["jsx-a11y-recommended"],
   {
-    rules: {
-      "@next/next/no-img-element": "off",
-    },
+    files: ["scripts/**"],
+    languageOptions: { globals: globals.node },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "styled-system/**"]),
+  eslintConfigPrettier,
+  globalIgnores(["dist/**", "out/**", ".astro/**"]),
 ]);
-
-export default eslintConfig;

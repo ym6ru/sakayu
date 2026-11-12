@@ -1,8 +1,5 @@
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://sakayu.dev").replace(/\/+$/, "");
-
-export const siteConfig = {
-  name: "sakayu.dev",
+export const site = {
+  name: "Yuki Matsusaka",
   description:
-    "さかゆのブログ。普段作ったものや気づいたこと、考えたことを残しています。インターフェースデザインが好きです。",
-  url: siteUrl,
+    "作ったもの、考えたことを記録しています。ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。おさかなと植物が好きです。",
 };

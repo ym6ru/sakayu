@@ -1,0 +1,218 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Base from "../layouts/Base.astro";
+import PostList from "../components/PostList.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { getPublishedPosts } from "../lib/posts";
+import horo from "../assets/works/horo.jpg";
+import kamihako from "../assets/works/kamihako.jpg";
+
+const contacts = [
+  { label: "X", id: "@XpKM4agvDSOfoGp", href: "https://x.com/XpKM4agvDSOfoGp" },
+  { label: "GitHub", id: "ym6ru", href: "https://github.com/ym6ru" },
+];
+
+const works: {
+  name: string;
+  description: string;
+  image: ImageMetadata;
+  href?: string;
+  badge?: string;
+}[] = [
+  { name: "3D 紙箱シミュレータ", description: "開発中", image: kamihako, badge: "開発中" },
+  { name: "放浪 / Horo", description: "妻のブログ", href: "https://horohororo.com/", image: horo },
+];
+
+const posts = (await getPublishedPosts()).slice(0, 4);
+---
+
+<Base home>
+  <div class="intro" slot="header">
+    <p>作ったもの、考えたことを記録しています。</p>
+    <p>
+      ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。おさかなと植物が好きです。
+    </p>
+  </div>
+  <section aria-labelledby="contact">
+    <SectionHeading id="contact" icon="mail">
+      Contact
+    </SectionHeading>
+    <ul>
+      {contacts.map(({ label, id, href }) => (
+        <li>
+          {label}：
+          <a href={href} target="_blank" rel="me noopener noreferrer">
+            {id}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section aria-labelledby="works">
+    <SectionHeading id="works" icon="briefcase-business">
+      Works
+    </SectionHeading>
+    <ul class="works">
+      {works.map(({ name, description, image, href, badge }) => {
+        const Tag = href ? "a" : "div";
+        return (
+          <li>
+            <Tag class="work" {...(href && { href, target: "_blank", rel: "noopener noreferrer" })}>
+              <div class="thumb">
+                <Image
+                  src={image}
+                  alt=""
+                  width={256}
+                  height={160}
+                  widths={[256, 512, 768, 1024]}
+                  sizes="(width < 40rem) 100vw, 256px"
+                  format="avif"
+                />
+                {badge && <span class="badge">{badge}</span>}
+              </div>
+              <span>{name}</span>
+              <small>{description}</small>
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+  <section aria-labelledby="diary">
+    <div class="section-head">
+      <SectionHeading id="diary" icon="pen-tool">
+        Diary
+      </SectionHeading>
+      <a class="all" href="/blog">
+        すべてみる
+      </a>
+    </div>
+    <div class="posts">
+      <PostList posts={posts} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    margin-block-start: var(--space-5);
+    color: var(--color-text-sub);
+    font-size: var(--text-base);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-loose);
+    letter-spacing: var(--tracking-body);
+  }
+
+  section {
+    font-size: var(--text-lg);
+  }
+
+  section + section {
+    margin-block-start: var(--space-6);
+    padding-block-start: var(--space-6);
+    background: linear-gradient(var(--color-border), var(--color-border)) no-repeat 0 0 / 20rem 1px;
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-3);
+    margin-block-start: var(--space-4);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-body);
+  }
+
+  .works {
+    grid-template-columns: repeat(auto-fill, 16rem);
+    gap: var(--space-5) var(--space-4);
+
+    @media (width < 40rem) {
+      grid-template-columns: 1fr;
+    }
+
+    & .work {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    & .thumb {
+      position: relative;
+    }
+
+    & img {
+      inline-size: 16rem;
+      block-size: 10rem;
+      object-fit: cover;
+
+      @media (width < 40rem) {
+        inline-size: 100%;
+        block-size: auto;
+        aspect-ratio: 16 / 10;
+      }
+
+      border: 1px solid var(--color-line-subtle);
+      border-radius: 8px;
+    }
+
+    & .badge {
+      position: absolute;
+      inset-block-start: var(--space-2);
+      inset-inline-start: var(--space-2);
+      padding: 0.125rem var(--space-2);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background-color: var(--color-bg);
+      color: var(--color-text-sub);
+      font-size: 0.625rem;
+      font-weight: var(--weight-medium);
+      line-height: 1.5;
+    }
+
+    & a:hover {
+      text-decoration-line: none;
+    }
+
+    & span {
+      font-size: var(--text-sm);
+      text-decoration-color: var(--color-underline);
+      text-decoration-thickness: var(--underline-thickness);
+      text-underline-offset: var(--underline-offset);
+
+      @media (width < 40rem) {
+        font-size: var(--text-base);
+      }
+    }
+
+    & a:hover span {
+      text-decoration-line: underline;
+    }
+
+    & small {
+      margin-block-start: calc(-1 * var(--space-2));
+      color: var(--color-text-sub);
+      font-size: var(--text-xs);
+
+      @media (width < 40rem) {
+        font-size: var(--text-sm);
+      }
+    }
+  }
+
+  .posts {
+    margin-block-start: var(--space-4);
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .all {
+    color: var(--color-text-sub);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-body);
+  }
+</style>

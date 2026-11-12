@@ -1,0 +1,25 @@
+---
+import Base from "../layouts/Base.astro";
+import PostList from "../components/PostList.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { getPublishedPosts } from "../lib/posts";
+
+const posts = await getPublishedPosts();
+---
+
+<Base title="Diary">
+  <div class="heading">
+    <SectionHeading icon="pen-tool" level={1}>
+      Diary
+    </SectionHeading>
+  </div>
+  <div class="posts">
+    <PostList posts={posts} />
+  </div>
+</Base>
+
+<style>
+  .posts {
+    margin-block-start: var(--space-4);
+  }
+</style>

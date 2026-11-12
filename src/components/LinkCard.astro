@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import { getOgp } from "../lib/ogp";
+
+interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+const { title, description, image } = await getOgp(url);
+const host = new URL(url).host;
+---
+
+<a class="card" href={url} target="_blank" rel="noopener noreferrer">
+  <span class="text">
+    <span class="title">{title ?? url}</span>
+    {description && <span class="description">{description}</span>}
+    <span class="host">{host}</span>
+  </span>
+  {image && <Image src={image} alt="" inferSize width={480} format="avif" />}
+</a>
+
+<style>
+  .card {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    &:hover {
+      text-decoration-line: none;
+      background-color: var(--color-hover);
+    }
+  }
+
+  .text {
+    display: grid;
+    flex: 1;
+    align-content: center;
+    gap: var(--space-1);
+    min-inline-size: 0;
+    padding: var(--space-3) var(--space-4);
+    line-height: 1.5;
+  }
+
+  .title {
+    overflow: hidden;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .description,
+  .host {
+    overflow: hidden;
+    color: var(--color-text-sub);
+    font-size: var(--text-xs);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  img {
+    flex-shrink: 0;
+    inline-size: 15rem;
+    block-size: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    border-inline-start: 1px solid var(--color-border);
+  }
+</style>
