@@ -26,7 +26,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  padding-inline: var(--gutter);
 }
 
 html.fonts-loading .page {
@@ -34,8 +33,9 @@ html.fonts-loading .page {
 }
 
 .page {
-  max-inline-size: var(--page-width);
+  max-inline-size: calc(var(--page-width) + 2 * var(--gutter));
   margin-inline: auto;
+  padding: var(--space-page) var(--gutter) var(--space-7);
   transition: opacity 0.3s ease-out;
 }
 

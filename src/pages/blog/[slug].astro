@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import Profile from "../../components/Profile.astro";
 import LinkCard from "../../components/LinkCard.astro";
 import { formatDate, getPublishedPosts } from "../../lib/posts";
 
@@ -20,30 +19,19 @@ const { Content } = await render(post);
   description={post.data.description}
   publishedAt={post.data.publishedAt}
 >
-  <main>
-    <Profile />
-    <article>
-      <header>
-        <Image src={post.data.icon} alt="" width={22} height={22} densities={[1, 2, 3]} />
-        <h1>{post.data.title}</h1>
-        <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
-      </header>
-      <div class="prose">
-        <Content components={{ LinkCard }} />
-      </div>
-    </article>
-  </main>
+  <article>
+    <header>
+      <Image src={post.data.icon} alt="" width={22} height={22} densities={[1, 2, 3]} />
+      <h1>{post.data.title}</h1>
+      <time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt)}</time>
+    </header>
+    <div class="prose">
+      <Content components={{ LinkCard }} />
+    </div>
+  </article>
 </Base>
 
 <style>
-  main {
-    padding-block-start: var(--space-page);
-  }
-
-  article {
-    margin-block-start: var(--space-7);
-  }
-
   header {
     display: grid;
     grid-template-columns: 2rem 1fr;
