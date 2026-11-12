@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import Base from "../layouts/Base.astro";
 import PostList from "../components/PostList.astro";
-import Profile from "../components/Profile.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import { getPublishedPosts } from "../lib/posts";
 import horo from "../assets/works/horo.jpg";
@@ -28,81 +27,72 @@ const works: {
 const posts = (await getPublishedPosts()).slice(0, 4);
 ---
 
-<Base title="sakayu.dev">
-  <main>
-    <Profile home />
-    <div class="intro">
-      <p>作ったもの、考えたことを記録しています。</p>
-      <p>
-        ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。おさかなと植物が好きです。
-      </p>
-    </div>
-    <section aria-labelledby="contact">
-      <SectionHeading id="contact" icon="mail">
-        Contact
-      </SectionHeading>
-      <ul>
-        {contacts.map(({ label, id, href }) => (
+<Base title="sakayu.dev" home>
+  <div class="intro" slot="header">
+    <p>作ったもの、考えたことを記録しています。</p>
+    <p>
+      ユーザーインターフェースデザインやWebフロントエンドの技術に興味があります。おさかなと植物が好きです。
+    </p>
+  </div>
+  <section aria-labelledby="contact">
+    <SectionHeading id="contact" icon="mail">
+      Contact
+    </SectionHeading>
+    <ul>
+      {contacts.map(({ label, id, href }) => (
+        <li>
+          {label}：
+          <a href={href} target="_blank" rel="me noopener noreferrer">
+            {id}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section aria-labelledby="works">
+    <SectionHeading id="works" icon="briefcase-business">
+      Works
+    </SectionHeading>
+    <ul class="works">
+      {works.map(({ name, description, image, href, badge }) => {
+        const Tag = href ? "a" : "div";
+        return (
           <li>
-            {label}：
-            <a href={href} target="_blank" rel="me noopener noreferrer">
-              {id}
-            </a>
+            <Tag class="work" {...(href && { href, target: "_blank", rel: "noopener noreferrer" })}>
+              <div class="thumb">
+                <Image
+                  src={image}
+                  alt=""
+                  width={256}
+                  height={160}
+                  widths={[256, 512, 768, 1024]}
+                  sizes="(width < 40rem) 100vw, 256px"
+                  format="avif"
+                />
+                {badge && <span class="badge">{badge}</span>}
+              </div>
+              <span>{name}</span>
+              <small>{description}</small>
+            </Tag>
           </li>
-        ))}
-      </ul>
-    </section>
-    <section aria-labelledby="works">
-      <SectionHeading id="works" icon="briefcase-business">
-        Works
-      </SectionHeading>
-      <ul class="works">
-        {works.map(({ name, description, image, href, badge }) => {
-          const Tag = href ? "a" : "div";
-          return (
-            <li>
-              <Tag
-                class="work"
-                {...(href && { href, target: "_blank", rel: "noopener noreferrer" })}
-              >
-                <div class="thumb">
-                  <Image
-                    src={image}
-                    alt=""
-                    width={256}
-                    height={160}
-                    densities={[1, 2]}
-                    format="avif"
-                  />
-                  {badge && <span class="badge">{badge}</span>}
-                </div>
-                <span>{name}</span>
-                <small>{description}</small>
-              </Tag>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-    <section aria-labelledby="diary">
-      <SectionHeading id="diary" icon="pen-tool">
-        Diary
-      </SectionHeading>
-      <div class="posts">
-        <PostList posts={posts} />
-      </div>
-      <a class="all" href="/blog">
-        すべての日記を見る
-      </a>
-    </section>
-  </main>
+        );
+      })}
+    </ul>
+  </section>
+  <section aria-labelledby="diary">
+    <SectionHeading id="diary" icon="pen-tool">
+      Diary
+    </SectionHeading>
+    <div class="posts">
+      <PostList posts={posts} />
+    </div>
+    <a class="all" href="/blog">
+      すべての日記を見る
+    </a>
+  </section>
 </Base>
 
 <style>
-  main {
-    padding-block-start: var(--space-page);
-  }
-
   .intro {
     margin-block-start: var(--space-5);
     color: var(--color-text-sub);
@@ -113,7 +103,6 @@ const posts = (await getPublishedPosts()).slice(0, 4);
   }
 
   section {
-    margin-block-start: var(--space-7);
     font-size: var(--text-lg);
   }
 
@@ -137,6 +126,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     grid-template-columns: repeat(auto-fill, 16rem);
     gap: var(--space-5) var(--space-4);
 
+    @media (width < 40rem) {
+      grid-template-columns: 1fr;
+    }
+
     & .work {
       display: grid;
       gap: var(--space-3);
@@ -150,6 +143,13 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       inline-size: 16rem;
       block-size: 10rem;
       object-fit: cover;
+
+      @media (width < 40rem) {
+        inline-size: 100%;
+        block-size: auto;
+        aspect-ratio: 16 / 10;
+      }
+
       border: 1px solid var(--color-line-subtle);
       border-radius: 8px;
     }
@@ -177,6 +177,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       text-decoration-color: var(--color-underline);
       text-decoration-thickness: var(--underline-thickness);
       text-underline-offset: var(--underline-offset);
+
+      @media (width < 40rem) {
+        font-size: var(--text-base);
+      }
     }
 
     & a:hover span {
@@ -187,6 +191,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
       margin-block-start: calc(-1 * var(--space-2));
       color: var(--color-text-sub);
       font-size: var(--text-xs);
+
+      @media (width < 40rem) {
+        font-size: var(--text-sm);
+      }
     }
   }
 
