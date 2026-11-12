@@ -27,6 +27,17 @@ const {
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
 const url = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ""), Astro.site);
 const image = new URL("/og.png", Astro.site);
+const article = publishedAt && {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  datePublished: publishedAt,
+  url,
+  image,
+  inLanguage: "ja",
+  author: { "@type": "Person", name: site.name, url: Astro.site },
+};
 ---
 
 <html lang="ja">
@@ -47,6 +58,7 @@ const image = new URL("/og.png", Astro.site);
     <meta property="og:locale" content="ja_JP" />
     {publishedAt && <meta property="article:published_time" content={publishedAt} />}
     <meta name="twitter:card" content="summary_large_image" />
+    {article && <script type="application/ld+json" set:html={JSON.stringify(article)} />}
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
