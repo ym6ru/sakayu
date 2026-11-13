@@ -1,14 +1,14 @@
 ## 🛠 技術スタック
 
-| 項目                 | 採用技術                 |
-| -------------------- | ------------------------ |
-| フレームワーク       | Next.js                  |
-| 言語                 | TypeScript               |
-| スタイリング         | Panda CSS                |
-| ブログ               | MDX                      |
-| パッケージマネージャ | pnpm                     |
-| テスト               | Vitest + Testing Library |
-| デプロイ             | Cloudflare Pages         |
+| 項目                 | 採用技術         |
+| -------------------- | ---------------- |
+| フレームワーク       | Astro            |
+| 言語                 | TypeScript       |
+| スタイリング         | CSS              |
+| フォント             | Gen Interface JP |
+| ブログ               | MDX              |
+| パッケージマネージャ | pnpm             |
+| デプロイ             | Cloudflare Pages |
 
 ## 🚀 セットアップ
 
