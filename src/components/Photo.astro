@@ -8,12 +8,30 @@ interface Props {
 }
 
 const { src, alt } = Astro.props;
+const portrait = src.height > src.width;
 ---
 
-<Image
-  src={src}
-  alt={alt}
-  widths={[880, 1760]}
-  sizes="(width < 55rem) 100vw, 55rem"
-  format="avif"
-/>
+{portrait ? (
+  <Image
+    class="portrait"
+    src={src}
+    alt={alt}
+    widths={[480, 960]}
+    sizes="(width < 30rem) 100vw, 30rem"
+    format="avif"
+  />
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    widths={[880, 1760]}
+    sizes="(width < 55rem) 100vw, 55rem"
+    format="avif"
+  />
+)}
+
+<style>
+  .portrait {
+    inline-size: 30rem;
+  }
+</style>
