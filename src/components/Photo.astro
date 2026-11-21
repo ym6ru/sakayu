@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+const portrait = src.height > src.width;
+---
+
+{portrait ? (
+  <Image
+    class="portrait"
+    src={src}
+    alt={alt}
+    widths={[480, 960]}
+    sizes="(width < 30rem) 100vw, 30rem"
+    format="avif"
+    quality={85}
+  />
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    widths={[880, 1760]}
+    sizes="(width < 55rem) 100vw, 55rem"
+    format="avif"
+    quality={85}
+  />
+)}
+
+<style>
+  .portrait {
+    inline-size: 30rem;
+  }
+</style>
