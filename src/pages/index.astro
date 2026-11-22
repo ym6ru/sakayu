@@ -136,6 +136,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
+
+    & svg {
+      color: var(--color-text-sub);
+    }
   }
 
   .works {
