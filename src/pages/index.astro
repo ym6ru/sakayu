@@ -54,6 +54,13 @@ const posts = (await getPublishedPosts()).slice(0, 4);
           </a>
         </li>
       ))}
+      <li>
+        Mail：
+        <span class="external" data-mail="eW02cnUuMTEyMUBnbWFpbC5jb20=">
+          <span>ym6ru.1121 [at] gmail.com</span>
+          <ArrowUpRight width={16} height={16} aria-hidden="true" />
+        </span>
+      </li>
     </ul>
   </section>
   <section aria-labelledby="works">
@@ -102,6 +109,20 @@ const posts = (await getPublishedPosts()).slice(0, 4);
   </section>
 </Base>
 
+<script>
+  for (const el of document.querySelectorAll<HTMLElement>("[data-mail]")) {
+    const mail = atob(el.dataset.mail ?? "");
+    const link = document.createElement("a");
+    for (const { name, value } of el.attributes) {
+      if (name !== "data-mail") link.setAttribute(name, value);
+    }
+    link.href = `mailto:${mail}`;
+    link.append(...el.childNodes);
+    link.firstElementChild!.textContent = mail;
+    el.replaceWith(link);
+  }
+</script>
+
 <style>
   .intro {
     margin-block-start: var(--space-5);
@@ -139,6 +160,10 @@ const posts = (await getPublishedPosts()).slice(0, 4);
 
     & svg {
       color: var(--color-text-sub);
+    }
+
+    &:not(a) svg {
+      display: none;
     }
   }
 
